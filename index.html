@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Tesla Track</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header>
+  <div>
+    <div class="brand"><span class="brand-dot"></span>TESLA TRACK</div>
+    <h1>Model Y <span>•</span> Resumo</h1>
+  </div>
+  <button class="icon-btn" id="settingsBtn">⚙</button>
+</header>
+
+<section class="hero">
+  <div class="hero-main">
+    <span class="label">QUILÓMETROS HOJE</span>
+    <strong id="kmToday">82,4</strong><em> km</em>
+    <div class="cost">⚡ <span id="costToday">€2,87</span> estimados hoje</div>
+  </div>
+  <div class="battery">
+    <div class="battery-top">BATERIA</div>
+    <div class="battery-value">68<span>%</span></div>
+    <div class="battery-bar"><i></i></div>
+    <small>Autonomia estimada: 278 km</small>
+  </div>
+</section>
+
+<div class="grid">
+  <section class="metric">
+    <div class="metric-icon">↯</div><span>Consumo médio</span>
+    <b>17,8 <small>kWh/100 km</small></b>
+  </section>
+  <section class="metric">
+    <div class="metric-icon">⚡</div><span>Energia usada</span>
+    <b>14,7 <small>kWh</small></b>
+  </section>
+  <section class="metric">
+    <div class="metric-icon">↗</div><span>Este mês</span>
+    <b>1.247 <small>km</small></b>
+  </section>
+  <section class="metric">
+    <div class="metric-icon">€</div><span>Custo este mês</span>
+    <b>€43,20</b>
+  </section>
+</div>
+
+<section class="card">
+  <div class="section-head"><div><h2>Viagens de hoje</h2><p>3 viagens registadas</p></div><button>Ver todas →</button></div>
+  <div class="trip"><div class="trip-icon">⌂</div><div class="trip-info"><b>Casa → Trabalho</b><small>08:12 · 31,2 km</small></div><strong>5,5 kWh</strong></div>
+  <div class="trip"><div class="trip-icon">⌂</div><div class="trip-info"><b>Trabalho → Casa</b><small>17:46 · 31,8 km</small></div><strong>5,6 kWh</strong></div>
+  <div class="trip"><div class="trip-icon">●</div><div class="trip-info"><b>Casa → Padel</b><small>21:05 · 19,4 km</small></div><strong>3,6 kWh</strong></div>
+</section>
+
+<section class="card">
+  <div class="section-head"><div><h2>Consumo</h2><p>Últimos 7 dias</p></div><span class="average">17,9 kWh/100 km</span></div>
+  <div class="chart">
+    <div class="line"></div>
+    <div class="chart-labels"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+  </div>
+</section>
+
+<div id="settings" class="modal hidden"><div class="modal-box">
+<h2>Definições</h2><label>Preço da eletricidade (€ / kWh)</label>
+<input id="price" type="number" step="0.001" value="0.195">
+<div><button class="primary" id="save">Guardar</button><button class="secondary" id="close">Fechar</button></div>
+</div></div>
+
+<footer>Tesla Track · V1 · Dados de demonstração</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
