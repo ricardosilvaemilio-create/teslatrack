@@ -3,49 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#071525">
 <title>Tesla Track</title>
 
 <style>
 :root{
-    --bg:#061321;
-    --sidebar:#071525;
-    --card:#0b1c31;
-    --card2:#10243d;
-    --border:#183654;
-    --text:#f1f6ff;
-    --muted:#9eb1c9;
-    --blue:#0879ed;
-    --blue2:#167cf0;
-    --green:#16d88b;
-    --orange:#f3932f;
+  --bg:#061525;
+  --bg2:#081b30;
+  --card:#0b2139;
+  --card2:#0d2743;
+  --border:#173a5d;
+  --text:#eef5ff;
+  --muted:#9db2ca;
+  --blue:#1677ee;
+  --blue2:#0b5fca;
+  --green:#21c978;
+  --purple:#7145e8;
+  --cyan:#12c3c8;
+  --orange:#ef8725;
+  --red:#ef5757;
 }
 
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    font-family:Inter,Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at 75% 10%,rgba(18,70,125,.13),transparent 32%),
-        var(--bg);
-    color:var(--text);
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
 body{
-    overflow-x:hidden;
+  overflow-x:hidden;
 }
 
-button,input{
-    font-family:inherit;
+button,
+input{
+  font:inherit;
+}
+
+svg{
+  display:block;
 }
 
 .app{
-    min-height:100vh;
+  display:flex;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 80% 0%,rgba(18,82,145,.12),transparent 32%),
+    linear-gradient(135deg,#061525,#07182a 55%,#061424);
 }
 
 /* =========================
@@ -53,156 +63,144 @@ button,input{
 ========================= */
 
 .sidebar{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:187px;
-    background:
-        linear-gradient(180deg,#071525 0%,#061322 100%);
-    border-right:1px solid #112b46;
-    padding:24px 13px 18px;
-    display:flex;
-    flex-direction:column;
-    z-index:10;
-}
-
-.logo{
-    text-align:center;
-    margin-bottom:29px;
-}
-
-.tesla-logo{
-    font-size:37px;
-    line-height:35px;
-    font-weight:900;
-    letter-spacing:-7px;
-    transform:scaleX(1.35);
-    display:inline-block;
-    margin-bottom:8px;
+  width:187px;
+  flex:none;
+  min-height:100vh;
+  padding:24px 13px 18px;
+  border-right:1px solid rgba(75,126,176,.15);
+  background:
+    linear-gradient(180deg,#071a2d 0%,#061526 70%,#051321 100%);
+  display:flex;
+  flex-direction:column;
 }
 
 .brand{
-    font-size:19px;
-    font-weight:700;
-    letter-spacing:.3px;
+  text-align:center;
+  margin-bottom:28px;
 }
 
-.brand span{
-    color:#1680f3;
+.tesla-logo{
+  width:46px;
+  height:42px;
+  object-fit:contain;
+  margin:0 auto 10px;
+  filter:brightness(1.12);
 }
 
-.menu{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
+.brand-name{
+  font-size:19px;
+  font-weight:700;
+  letter-spacing:.2px;
 }
 
-.menu a{
-    color:#b9c9dd;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:13px;
-    height:47px;
-    padding:0 13px;
-    border-radius:12px;
-    font-size:13px;
-    font-weight:500;
-    transition:.2s;
+.brand-name span{
+  color:#1979ed;
 }
 
-.menu a:hover{
-    background:#102943;
-    color:white;
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
-.menu a.active{
-    background:linear-gradient(90deg,#086ad2,#0759b5);
-    color:white;
-    box-shadow:0 5px 18px rgba(0,106,220,.22);
+.nav-item{
+  height:47px;
+  border-radius:11px;
+  padding:0 12px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#b8c8dc;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.menu-icon{
-    width:19px;
-    text-align:center;
-    font-size:19px;
+.nav-item:hover{
+  background:rgba(24,117,234,.12);
+  color:white;
 }
 
-.car-card{
-    margin-top:auto;
-    background:linear-gradient(145deg,#10253e,#0a1b30);
-    border:1px solid #173653;
-    border-radius:13px;
-    padding:15px 12px;
-    min-height:149px;
+.nav-item.active{
+  color:white;
+  background:linear-gradient(90deg,#0870df,#0755aa);
+  box-shadow:0 8px 20px rgba(0,93,195,.18);
 }
 
-.car-image{
-    height:61px;
-    position:relative;
-    margin-bottom:5px;
+.nav-icon{
+  width:20px;
+  height:20px;
+  flex:none;
 }
 
-.car-body{
-    position:absolute;
-    left:17px;
-    right:17px;
-    bottom:11px;
-    height:20px;
-    background:linear-gradient(180deg,#7288a0,#1e344c);
-    border-radius:35px 35px 9px 9px;
-    transform:skewX(-8deg);
-    box-shadow:0 8px 15px rgba(0,0,0,.35);
+.sidebar-bottom{
+  margin-top:auto;
 }
 
-.car-roof{
-    position:absolute;
-    left:37px;
-    right:37px;
-    bottom:28px;
-    height:25px;
-    background:linear-gradient(150deg,#5d7189,#1b2f46);
-    border-radius:45px 45px 5px 5px;
-    transform:skewX(-12deg);
+.vehicle-card{
+  min-height:149px;
+  border-radius:12px;
+  border:1px solid rgba(51,105,153,.3);
+  background:
+    linear-gradient(180deg,rgba(14,40,66,.94),rgba(8,27,45,.94));
+  padding:9px 9px 10px;
+  position:relative;
+  overflow:hidden;
 }
 
-.wheel{
-    position:absolute;
-    bottom:3px;
-    width:17px;
-    height:17px;
-    border-radius:50%;
-    background:#09111b;
-    border:3px solid #43566b;
+.vehicle-photo{
+  width:100%;
+  height:59px;
+  object-fit:contain;
+  display:block;
+  margin-bottom:2px;
+  opacity:.95;
 }
 
-.wheel.one{left:29px}
-.wheel.two{right:25px}
-
-.car-name{
-    font-size:13px;
-    font-weight:700;
-    margin-top:2px;
+.vehicle-name{
+  font-size:13px;
+  font-weight:700;
+  margin:1px 8px 2px;
 }
 
-.car-version{
-    font-size:10px;
-    color:#9fb1c6;
-    margin-top:2px;
+.vehicle-model{
+  font-size:9.5px;
+  color:#aebfd2;
+  margin:0 8px 13px;
 }
 
-.connected{
-    color:var(--green);
-    font-size:11px;
-    margin-top:17px;
+.vehicle-status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  font-weight:600;
+  color:#26ce7b;
+  margin-left:8px;
 }
 
-.footer-side{
-    color:#71869e;
-    font-size:9px;
-    line-height:1.6;
-    margin-top:17px;
+.status-dot{
+  width:8px;
+  height:8px;
+  background:#1fc878;
+  border-radius:50%;
+  box-shadow:0 0 10px rgba(31,200,120,.35);
+}
+
+.vehicle-chevron{
+  position:absolute;
+  right:13px;
+  bottom:37px;
+  color:#9db1c9;
+  font-size:22px;
+}
+
+.sidebar-footer{
+  padding:19px 2px 0;
+  color:#7189a4;
+  font-size:9.5px;
+  line-height:1.55;
 }
 
 /* =========================
@@ -210,15 +208,15 @@ button,input{
 ========================= */
 
 .main{
-    margin-left:187px;
-    padding:24px 20px 20px;
-    max-width:1300px;
-    margin-right:auto;
+  flex:1;
+  min-width:0;
+  padding:25px 14px 20px 20px;
 }
 
-.dashboard{
-    max-width:1100px;
-    margin:auto;
+.content{
+  width:100%;
+  max-width:765px;
+  margin:0 auto;
 }
 
 /* =========================
@@ -226,84 +224,73 @@ button,input{
 ========================= */
 
 .hero{
-    height:192px;
-    border-radius:14px;
-    border:1px solid #183654;
-    overflow:hidden;
-    position:relative;
-    background:
-        linear-gradient(90deg,
-            rgba(9,30,53,.98) 0%,
-            rgba(12,34,58,.94) 38%,
-            rgba(11,31,51,.58) 70%,
-            rgba(7,18,30,.28) 100%),
-        radial-gradient(ellipse at 78% 10%,#77849b 0%,#293c55 28%,#11253c 48%,#081626 75%);
-    margin-bottom:16px;
+  height:191px;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid rgba(52,104,154,.27);
+  background:#102b49;
 }
 
-.hero:before{
-    content:"";
-    position:absolute;
-    right:-20px;
-    bottom:-16px;
-    width:430px;
-    height:155px;
-    border-radius:55% 45% 16% 12%;
-    background:
-        linear-gradient(170deg,#f7fafc 0%,#d7e0e7 48%,#8d9aa7 100%);
-    transform:skewX(-9deg);
-    box-shadow:
-        -8px 18px 25px rgba(0,0,0,.4),
-        inset 0 -15px 20px rgba(0,0,0,.13);
-    opacity:.94;
+.hero-photo{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
 }
 
-.hero:after{
-    content:"";
-    position:absolute;
-    right:53px;
-    bottom:82px;
-    width:245px;
-    height:65px;
-    border-radius:80% 70% 20% 10%;
-    background:
-        linear-gradient(160deg,#0a1724,#34475b 48%,#111f2d 100%);
-    transform:skewX(-10deg);
-    opacity:.95;
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(7,25,44,.96) 0%,
+      rgba(7,25,44,.87) 33%,
+      rgba(7,25,44,.42) 58%,
+      rgba(7,25,44,.05) 100%);
 }
 
 .hero-content{
-    position:relative;
-    z-index:2;
-    padding:31px 20px;
+  position:relative;
+  z-index:2;
+  padding:31px 20px;
 }
 
-.hero h1{
-    font-size:28px;
-    margin:0 0 4px;
-    font-weight:750;
-    letter-spacing:-.7px;
+.hero-title{
+  font-size:27px;
+  line-height:1.05;
+  font-weight:750;
+  margin-bottom:7px;
 }
 
-.hero p{
-    color:#aebed2;
-    font-size:16px;
-    line-height:1.45;
-    margin:0;
-    max-width:300px;
+.hero-subtitle{
+  font-size:16px;
+  line-height:1.35;
+  color:#afc1d8;
+  max-width:260px;
 }
 
-.date{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    margin-top:20px;
-    padding:9px 12px;
-    border:1px solid #214362;
-    border-radius:9px;
-    background:rgba(6,25,44,.72);
-    color:#b9c9dd;
-    font-size:11px;
+.date-pill{
+  margin-top:20px;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  height:34px;
+  padding:0 13px;
+  border:1px solid rgba(83,133,180,.35);
+  background:rgba(5,23,41,.65);
+  border-radius:18px;
+  color:#d6e1ef;
+  font-size:11px;
+  font-weight:600;
+  backdrop-filter:blur(7px);
+}
+
+.date-pill svg{
+  width:16px;
+  height:16px;
 }
 
 /* =========================
@@ -311,195 +298,247 @@ button,input{
 ========================= */
 
 .metrics{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:14px;
-    margin-bottom:18px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+  margin-top:16px;
 }
 
 .metric{
-    min-height:181px;
-    border:1px solid #173653;
-    background:
-        linear-gradient(145deg,#0e2139,#0a1b30);
-    border-radius:14px;
-    padding:17px 16px;
-    position:relative;
-    overflow:hidden;
+  min-width:0;
+  min-height:180px;
+  border-radius:12px;
+  border:1px solid rgba(44,91,134,.43);
+  background:
+    linear-gradient(145deg,rgba(13,39,65,.98),rgba(8,28,47,.98));
+  padding:16px 15px;
 }
 
 .metric-icon{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:21px;
-    margin-bottom:13px;
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:17px;
 }
 
-.icon-blue{background:linear-gradient(145deg,#087ff1,#0758ba)}
-.icon-green{background:linear-gradient(145deg,#19c96d,#07965b)}
-.icon-purple{background:linear-gradient(145deg,#7444e8,#5127b8)}
-.icon-cyan{background:linear-gradient(145deg,#11c8d0,#079ba9)}
-.icon-orange{background:linear-gradient(145deg,#f59a31,#db6d16)}
+.metric-icon svg{
+  width:22px;
+  height:22px;
+  stroke:white;
+}
 
-.metric-title{
-    font-size:12px;
-    color:#c1cee0;
-    margin-bottom:6px;
+.metric-icon.blue{
+  background:#075cc9;
+}
+
+.metric-icon.green{
+  background:#0caf61;
+}
+
+.metric-icon.purple{
+  background:#6941df;
+}
+
+.metric-icon.cyan{
+  background:#08b8bf;
+}
+
+.metric-icon.orange{
+  background:#e87e22;
+}
+
+.metric-label{
+  color:#b8c8dc;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
 }
 
 .metric-value{
-    font-size:24px;
-    font-weight:750;
-    letter-spacing:-.6px;
-    white-space:nowrap;
+  margin-top:8px;
+  font-size:25px;
+  font-weight:750;
+  white-space:nowrap;
+  letter-spacing:-.5px;
 }
 
-.metric-value span{
-    font-size:14px;
-    font-weight:500;
-    color:#d7e1ee;
+.metric-value small{
+  font-size:9px;
+  font-weight:600;
+  color:#b8c8dc;
+  letter-spacing:0;
 }
 
-.metric-small{
-    font-size:10px;
-    color:#a7b8cc;
-    margin-top:6px;
+.metric-change{
+  margin-top:13px;
+  font-size:10px;
+  color:#9fb2c9;
+  white-space:nowrap;
 }
 
-.change{
-    position:absolute;
-    left:17px;
-    bottom:17px;
-    font-size:10px;
-    color:#9eb1c8;
-}
-
-.change strong{
-    color:var(--green);
-    font-size:12px;
+.metric-change strong{
+  color:#22d17d;
 }
 
 /* =========================
    GRID
 ========================= */
 
-.grid{
-    display:grid;
-    grid-template-columns:1.65fr 1fr;
-    gap:16px;
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:1.07fr .93fr;
+  gap:15px;
+  margin-top:17px;
 }
 
 .card{
-    border:1px solid #173653;
-    background:linear-gradient(145deg,#0d2037,#091a2e);
-    border-radius:14px;
-    padding:16px;
+  border-radius:12px;
+  border:1px solid rgba(44,91,134,.43);
+  background:
+    linear-gradient(145deg,rgba(12,36,60,.98),rgba(7,26,44,.98));
+  overflow:hidden;
 }
 
 .card-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:7px;
-}
-
-.card-title{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-size:15px;
-    font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:15px 16px 5px;
 }
 
 .card-title-icon{
-    width:34px;
-    height:34px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:#106bd0;
-    font-size:18px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  background:#0b66d5;
 }
 
-.card-link{
-    color:#1885ef;
-    font-size:11px;
+.card-title-icon.green{
+  background:#10ae65;
 }
 
-.subtitle{
-    color:#9eb1c9;
-    font-size:11px;
-    margin:0 0 12px 46px;
+.card-title-icon.orange{
+  background:#e68123;
+}
+
+.card-title-icon.gray{
+  background:#58718e;
+}
+
+.card-title-icon svg{
+  width:18px;
+  height:18px;
+  stroke:white;
+}
+
+.card-title{
+  font-size:15px;
+  font-weight:700;
+}
+
+.card-subtitle{
+  color:#9db1c9;
+  font-size:9.5px;
+  margin-top:3px;
+}
+
+.view-all{
+  margin-left:auto;
+  color:#1680ed;
+  font-size:10px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.view-all span{
+  font-size:17px;
 }
 
 /* =========================
    TRIPS
 ========================= */
 
-.trip{
-    height:61px;
-    border:1px solid #193d5f;
-    border-radius:13px;
-    background:linear-gradient(90deg,#102640,#0c2037);
-    margin-bottom:8px;
-    display:grid;
-    grid-template-columns:42px 1fr 70px 68px 15px;
-    align-items:center;
-    gap:8px;
-    padding:0 12px;
+.trips{
+  padding:5px 14px 16px;
 }
 
-.trip:last-child{
-    margin-bottom:0;
+.trip{
+  height:63px;
+  border:1px solid #183e63;
+  border-radius:13px;
+  background:linear-gradient(90deg,#0c2946,#0a223b);
+  margin-top:8px;
+  display:flex;
+  align-items:center;
+  padding:0 10px;
+  gap:10px;
 }
 
 .trip-icon{
-    width:34px;
-    height:34px;
-    border-radius:10px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:17px;
+  width:35px;
+  height:35px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
 }
 
-.trip-icon.home{
-    background:linear-gradient(145deg,#1385ef,#075ab7);
+.trip-icon.blue{
+  background:#096bd8;
 }
 
-.trip-icon.work{
-    background:linear-gradient(145deg,#8151e9,#5d2ac3);
+.trip-icon.purple{
+  background:#6b40dd;
 }
 
-.trip-icon.pad{
-    background:linear-gradient(145deg,#1bc37b,#0c9560);
+.trip-icon.green{
+  background:#12ae66;
+}
+
+.trip-icon svg{
+  width:18px;
+  height:18px;
+  stroke:white;
 }
 
 .trip-route{
-    font-size:12px;
-    font-weight:650;
+  min-width:0;
+  flex:1;
+}
+
+.trip-name{
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
 }
 
 .trip-time{
-    color:#a1b5cd;
-    font-size:10px;
-    margin-top:4px;
+  font-size:9px;
+  color:#a2b5cb;
+  margin-top:5px;
 }
 
 .trip-data{
-    color:#c4d2e2;
-    font-size:10px;
-    text-align:right;
+  display:flex;
+  gap:20px;
+  font-size:9px;
+  white-space:nowrap;
 }
 
-.arrow{
-    color:#b8c8da;
-    font-size:18px;
+.trip-arrow{
+  color:#b4c4d7;
+  font-size:20px;
+  margin-left:2px;
 }
 
 /* =========================
@@ -507,1124 +546,1009 @@ button,input{
 ========================= */
 
 .chart-card{
-    min-height:320px;
+  min-height:320px;
+}
+
+.chart-area{
+  padding:10px 14px 14px;
 }
 
 .chart{
-    height:158px;
-    margin-top:10px;
-    position:relative;
-    border-bottom:1px solid #28425c;
-    background:
-        linear-gradient(#18344f 1px,transparent 1px),
-        linear-gradient(90deg,#18344f 1px,transparent 1px);
-    background-size:20% 25%;
+  width:100%;
+  height:155px;
+  position:relative;
 }
 
-.chart-labels-y{
-    position:absolute;
-    left:-30px;
-    top:-2px;
-    height:130px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    color:#9bb0c7;
-    font-size:9px;
+.chart svg{
+  width:100%;
+  height:100%;
 }
 
-.chart-line{
-    position:absolute;
-    inset:20px 7px 8px;
-}
-
-.chart-line svg{
-    width:100%;
-    height:100%;
-    overflow:visible;
-}
-
-.chart-days{
-    display:flex;
-    justify-content:space-between;
-    color:#9bb0c7;
-    font-size:9px;
-    margin-top:7px;
+.chart-labels{
+  display:flex;
+  justify-content:space-between;
+  color:#8fa6bf;
+  font-size:8px;
+  margin:0 13px;
 }
 
 .average{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    margin-top:13px;
-    padding:9px;
-    border-radius:11px;
-    background:linear-gradient(90deg,#102946,#112a46);
+  margin-top:14px;
+  border-radius:11px;
+  height:51px;
+  background:linear-gradient(90deg,#0d3153,#0c2947);
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  gap:11px;
 }
 
 .average-icon{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    background:#0879e8;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  background:#0868d9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.average-icon svg{
+  width:15px;
+  height:15px;
+  stroke:#fff;
 }
 
 .average-text{
-    font-size:9px;
-    color:#9db1c8;
+  flex:1;
+}
+
+.average-label{
+  color:#91a9c2;
+  font-size:8.5px;
 }
 
 .average-value{
-    font-size:12px;
-    font-weight:700;
-    margin-top:3px;
+  margin-top:2px;
+  font-size:12px;
+  font-weight:700;
 }
 
 .average-change{
-    margin-left:auto;
-    color:#18d995;
-    font-size:10px;
+  font-size:9px;
+  color:#1bd079;
 }
 
 /* =========================
-   COST
+   COSTS
 ========================= */
 
 .cost-card{
-    min-height:214px;
-    margin-top:16px;
+  min-height:215px;
 }
 
-.cost-value{
-    font-size:25px;
-    margin-top:9px;
-    font-weight:750;
+.cost-body{
+  padding:7px 15px 15px;
+}
+
+.cost-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+
+.cost-total{
+  font-size:24px;
+  font-weight:750;
 }
 
 .cost-period{
-    color:#a4b7cd;
-    font-size:10px;
-    margin-top:2px;
+  color:#a0b3c9;
+  font-size:9px;
+  margin-top:2px;
 }
 
-.price-badge{
-    float:right;
-    margin-top:-38px;
-    background:#102a47;
-    border:1px solid #234968;
-    border-radius:20px;
-    padding:7px 13px;
-    font-size:10px;
-    color:#d0dbea;
+.price-pill{
+  padding:8px 11px;
+  border:1px solid #28527b;
+  background:#102e4d;
+  border-radius:18px;
+  color:#dbe8f7;
+  font-size:9px;
 }
 
-.electricity-link{
-    float:right;
-    clear:right;
-    margin-top:7px;
-    color:#0e87fa;
-    font-size:9px;
+.price-label{
+  text-align:right;
+  color:#1681ed;
+  font-size:8px;
+  margin-top:3px;
 }
 
 .progress{
-    height:12px;
-    border-radius:10px;
-    background:#14304d;
-    margin-top:17px;
-    overflow:hidden;
+  height:12px;
+  border-radius:8px;
+  margin:15px 0 16px;
+  background:#153654;
+  overflow:hidden;
 }
 
 .progress span{
-    display:block;
-    height:100%;
-    width:56%;
-    border-radius:10px;
-    background:linear-gradient(90deg,#20bda0,#94c94e);
+  display:block;
+  width:53%;
+  height:100%;
+  border-radius:8px;
+  background:linear-gradient(90deg,#13b9a0,#9bcf4c);
 }
 
 .cost-stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    margin-top:13px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
 }
 
 .cost-stat{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    padding-left:9px;
-    border-right:1px solid #173653;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:0;
 }
 
-.cost-stat:first-child{
-    padding-left:2px;
-}
-
-.cost-stat:last-child{
-    border:0;
+.cost-stat + .cost-stat{
+  border-left:1px solid #1a3b5c;
+  padding-left:17px;
 }
 
 .cost-stat-icon{
-    font-size:21px;
+  width:23px;
+  height:23px;
+  flex:none;
 }
 
-.cost-stat-title{
-    font-size:9px;
-    color:#8fa5be;
+.cost-stat-icon svg{
+  width:100%;
+  height:100%;
 }
 
-.cost-stat-value{
-    font-size:11px;
-    margin-top:3px;
+.stat-label{
+  color:#8ea7c0;
+  font-size:8px;
+  white-space:nowrap;
+}
+
+.stat-value{
+  font-size:10px;
+  font-weight:700;
+  margin-top:3px;
 }
 
 /* =========================
    SETTINGS
 ========================= */
 
-.settings{
-    min-height:214px;
+.settings-card{
+  min-height:215px;
+}
+
+.settings-body{
+  padding:8px 15px 13px;
 }
 
 .setting-label{
-    font-size:11px;
-    color:#b4c4d8;
-    margin:20px 0 7px;
+  color:#9db0c6;
+  font-size:10px;
+  margin-bottom:7px;
 }
 
-.input-row{
-    display:flex;
-    gap:8px;
+.setting-row{
+  display:flex;
+  gap:8px;
 }
 
-.input-row input{
-    width:100%;
-    background:#102843;
-    border:1px solid #214362;
-    color:#fff;
-    border-radius:10px;
-    padding:10px 12px;
-    outline:none;
-    font-size:12px;
+.setting-input{
+  flex:1;
+  min-width:0;
+  height:35px;
+  border-radius:10px;
+  border:1px solid #234c73;
+  outline:none;
+  background:#102d4b;
+  color:#e9f1fa;
+  padding:0 11px;
+  font-size:11px;
 }
 
-.input-row input:focus{
-    border-color:#1683ed;
+.save-btn{
+  height:35px;
+  padding:0 15px;
+  border:0;
+  border-radius:9px;
+  background:#1877e9;
+  color:white;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
 }
 
-.save{
-    border:0;
-    border-radius:10px;
-    background:linear-gradient(145deg,#1882ed,#0766d2);
-    color:white;
-    padding:0 18px;
-    font-weight:650;
-    font-size:11px;
-    cursor:pointer;
-}
-
-.save:hover{
-    filter:brightness(1.1);
+.save-btn:hover{
+  background:#2584f3;
 }
 
 .divider{
-    height:1px;
-    background:#173653;
-    margin:17px 0 12px;
+  height:1px;
+  background:#193b5b;
+  margin:16px 0 13px;
 }
 
-.version{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.version-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
 
-.version-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.mini-tesla{
-    font-size:25px;
-    font-weight:900;
+.version-logo{
+  width:31px;
+  height:28px;
+  object-fit:contain;
 }
 
 .version-name{
-    font-size:11px;
+  font-size:11px;
+  font-weight:700;
 }
 
 .version-sub{
-    font-size:9px;
-    color:#91a6bd;
-    margin-top:3px;
+  color:#829bb5;
+  font-size:8px;
+  margin-top:3px;
+}
+
+.version-arrow{
+  margin-left:auto;
+  color:#a6b8cc;
+  font-size:20px;
 }
 
 /* =========================
-   TOAST
+   MOBILE
 ========================= */
 
-.toast{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    background:#12304d;
-    border:1px solid #285172;
-    border-radius:10px;
-    padding:11px 15px;
-    font-size:11px;
-    opacity:0;
-    transform:translateY(10px);
-    pointer-events:none;
-    transition:.25s;
-    z-index:50;
+@media(max-width:850px){
+  .sidebar{
+    width:170px;
+  }
+
+  .metrics{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
 }
 
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
+@media(max-width:650px){
+  .app{
+    display:block;
+  }
+
+  .sidebar{
+    width:100%;
+    min-height:auto;
+    height:auto;
+    padding:12px;
+    border-right:0;
+    border-bottom:1px solid rgba(75,126,176,.15);
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    margin-bottom:10px;
+  }
+
+  .tesla-logo{
+    width:35px;
+    height:32px;
+    margin:0;
+  }
+
+  .brand-name{
+    font-size:17px;
+  }
+
+  .nav{
+    flex-direction:row;
+    overflow-x:auto;
+    padding-bottom:2px;
+  }
+
+  .nav-item{
+    min-width:max-content;
+    height:39px;
+    padding:0 12px;
+  }
+
+  .sidebar-bottom{
+    display:none;
+  }
+
+  .main{
+    padding:12px;
+  }
+
+  .hero{
+    height:190px;
+  }
+
+  .hero-content{
+    padding:25px 18px;
+  }
+
+  .hero-title{
+    font-size:25px;
+  }
+
+  .hero-subtitle{
+    font-size:14px;
+  }
+
+  .metrics{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+
+  .metric{
+    min-height:155px;
+    padding:13px;
+  }
+
+  .metric-icon{
+    margin-bottom:12px;
+  }
+
+  .metric-value{
+    font-size:22px;
+  }
+
+  .dashboard-grid{
+    gap:10px;
+  }
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+@media(max-width:390px){
+  .metrics{
+    grid-template-columns:1fr;
+  }
 
-@media(max-width:1050px){
-    .metrics{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:750px){
-    .sidebar{
-        position:static;
-        width:100%;
-        height:auto;
-        padding:15px;
-        border-right:0;
-        border-bottom:1px solid #112b46;
-    }
-
-    .logo{
-        margin-bottom:13px;
-    }
-
-    .tesla-logo{
-        font-size:28px;
-    }
-
-    .brand{
-        font-size:16px;
-    }
-
-    .menu{
-        flex-direction:row;
-        overflow-x:auto;
-        padding-bottom:2px;
-    }
-
-    .menu a{
-        min-width:max-content;
-        height:40px;
-        padding:0 12px;
-    }
-
-    .car-card,
-    .footer-side{
-        display:none;
-    }
-
-    .main{
-        margin-left:0;
-        padding:14px;
-    }
-
-    .metrics{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .hero{
-        height:190px;
-    }
-
-    .hero:before{
-        width:300px;
-    }
-
-    .hero:after{
-        width:190px;
-    }
-}
-
-@media(max-width:500px){
-    .hero{
-        height:180px;
-    }
-
-    .hero-content{
-        padding:25px 18px;
-    }
-
-    .hero h1{
-        font-size:25px;
-    }
-
-    .hero p{
-        font-size:14px;
-        max-width:220px;
-    }
-
-    .metrics{
-        gap:8px;
-    }
-
-    .metric{
-        min-height:160px;
-        padding:13px;
-    }
-
-    .metric-value{
-        font-size:20px;
-    }
-
-    .metric-value span{
-        font-size:12px;
-    }
-
-    .trip{
-        grid-template-columns:37px 1fr 55px 15px;
-    }
-
-    .trip-data:nth-of-type(4){
-        display:none;
-    }
-
-    .trip{
-        grid-template-columns:37px 1fr 60px 15px;
-    }
-
-    .cost-stats{
-        gap:4px;
-    }
-
-    .cost-stat{
-        gap:5px;
-    }
+  .hero-photo{
+    object-position:58% center;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- SVG ICON LIBRARY -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+
+    <!-- Road / kilometres -->
+    <symbol id="road" viewBox="0 0 24 24">
+      <path d="M7 21l3-18h4l3 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M12 5v3M12 11v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Lightning / energy -->
+    <symbol id="bolt" viewBox="0 0 24 24">
+      <path d="M13.2 2L5.8 13h5.5L10.7 22 18.2 10h-5.4z"
+            fill="currentColor" stroke="currentColor" stroke-width="1"/>
+    </symbol>
+
+    <!-- Gauge / consumption -->
+    <symbol id="gauge" viewBox="0 0 24 24">
+      <path d="M4 16a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M12 12l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M5.5 18h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Battery -->
+    <symbol id="battery" viewBox="0 0 24 24">
+      <rect x="3" y="7" width="17" height="10" rx="2"
+            fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M20 10h2v4h-2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M6 10h8v4H6z" fill="currentColor"/>
+    </symbol>
+
+    <!-- Euro -->
+    <symbol id="euro" viewBox="0 0 24 24">
+      <path d="M18 6.5c-1.2-1.2-2.8-1.8-4.5-1.8-3.6 0-6 3-6 7.3s2.4 7.3 6 7.3c1.7 0 3.3-.6 4.5-1.8"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M5 10h8M5 14h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Route / trips -->
+    <symbol id="route" viewBox="0 0 24 24">
+      <circle cx="6" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <circle cx="18" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+      <path d="M8 7h4c2 0 2 3 0 3h-1c-2 0-2 3 0 3h4"
+            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M6 9v4M18 15v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+
+    <!-- Home -->
+    <symbol id="home" viewBox="0 0 24 24">
+      <path d="M3 11.5L12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5.5 10.5V20h13v-9.5M9.5 20v-5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- Briefcase -->
+    <symbol id="briefcase" viewBox="0 0 24 24">
+      <rect x="3" y="7" width="18" height="13" rx="2"
+            fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18"
+            fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M10 12v2h4v-2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+
+    <!-- Calendar -->
+    <symbol id="calendar" viewBox="0 0 24 24">
+      <rect x="4" y="5" width="16" height="15" rx="2"
+            fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 3v4M16 3v4M4 9h16" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M8 13h2M14 13h2M8 16h2" stroke="currentColor" stroke-width="1.5"/>
+    </symbol>
+
+    <!-- Gear -->
+    <symbol id="gear" viewBox="0 0 24 24">
+      <path d="M9.7 3h4.6l.7 2.4c.5.2 1 .5 1.4.8l2.4-.8 2.3 4-1.8 1.7c.1.5.1 1.1 0 1.7l1.8 1.7-2.3 4-2.4-.8c-.4.3-.9.6-1.4.8l-.7 2.4H9.7L9 18.5c-.5-.2-1-.5-1.4-.8l-2.4.8-2.3-4 1.8-1.7c-.1-.6-.1-1.2 0-1.7L2.9 9.4l2.3-4 2.4.8c.4-.3.9-.6 1.4-.8z"
+            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+    </symbol>
+
+    <!-- Statistics -->
+    <symbol id="stats" viewBox="0 0 24 24">
+      <path d="M5 20V11M10 20V7M15 20V4M20 20V9"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Leaf -->
+    <symbol id="leaf" viewBox="0 0 24 24">
+      <path d="M20 4C11 4 5 8 5 14c0 3 2 5 5 5 6 0 9-6 10-15z"
+            fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M4 21c3-5 7-8 12-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Chevron -->
+    <symbol id="chevron" viewBox="0 0 24 24">
+      <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+  </defs>
+</svg>
+
 <div class="app">
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
 
-    <div class="logo">
-        <div class="tesla-logo">T</div>
-        <div class="brand">TESLA <span>TRACK</span></div>
+    <div class="brand">
+      <!-- Tesla T logo from the supplied reference -->
+      <img
+        class="tesla-logo"
+        src="data:image/webp;base64,UklGRiQCAABXRUJQVlA4IBgCAADwCwCdASozAC4APjEUiUMiISEWrmQAIAMEtIBhu71P5XyiB9D9vzhf9O+VXMW/zb8iNRd1In+j9Hz+18x/0F/t/VS/yYh38dyf3lMGMO26rcUpGGK3tWcl4cylQPVCYM5w8g73fqa90AD+/5KsWpgIizixEby+iLDGqiozJkMjKIatUtlVf96bZ/WqE7H0nticf/tRHDnovhic8mKdH8Vcu9lOuL/DTh7elG7VSnbN6m/x/Y7izsCMHetehXkUvmS+jfO/lkmtGmsLioc/6nkDAyjwTvnP+BWzhyt/5u5Lze2tC9zAX/2db2vXcko2/GKyM32e3/vkc3O6RDPkEV/0tt8maPEmDkn/e8gf/8lODFS8pUTUnHQ1seCV/hJq3/6aqI45zZmBYD7ubzjCMNhUiwSPhGH+mXY/j8SlGO1e62/YzDCkgGxnUxzAc34xZSyBoPlNK0FJ8+h42H7li7js5TQtaFKSVlC7BWkdEcifgfwXhCz667SXN/Eyb8LtD0lUEc/GaqcpQthQ4MCbsw4fvASYEFNZZrH03McLy42CIKWzkxNuw/0bfSCUFhF7rtZBWQu1cOEua+Lc5zx9zfbfy3vVR/t4Etev/MlFldpItWuv4Gogc/Vj2BlYermBRfVIzn0VTd4QGGhw8Wa0XPjJ5a/h9HSniTOf33bKja1gPObI86pAJGm4ip2NgVOC15h5ni4bZYqAAA=="
+        alt="Tesla"
+      >
+      <div class="brand-name">TESLA <span>TRACK</span></div>
     </div>
 
-    <nav class="menu">
-        <a href="#" class="active">
-            <span class="menu-icon">⌂</span>
-            <span>Resumo</span>
-        </a>
+    <nav class="nav">
 
-        <a href="#">
-            <span class="menu-icon">♧</span>
-            <span>Viagens</span>
-        </a>
+      <div class="nav-item active">
+        <svg class="nav-icon"><use href="#home"/></svg>
+        <span>Resumo</span>
+      </div>
 
-        <a href="#">
-            <span class="menu-icon">▣</span>
-            <span>Histórico</span>
-        </a>
+      <div class="nav-item">
+        <svg class="nav-icon"><use href="#route"/></svg>
+        <span>Viagens</span>
+      </div>
 
-        <a href="#">
-            <span class="menu-icon">▥</span>
-            <span>Estatísticas</span>
-        </a>
+      <div class="nav-item">
+        <svg class="nav-icon"><use href="#calendar"/></svg>
+        <span>Histórico</span>
+      </div>
 
-        <a href="#">
-            <span class="menu-icon">⚙</span>
-            <span>Definições</span>
-        </a>
+      <div class="nav-item">
+        <svg class="nav-icon"><use href="#stats"/></svg>
+        <span>Estatísticas</span>
+      </div>
+
+      <div class="nav-item">
+        <svg class="nav-icon"><use href="#gear"/></svg>
+        <span>Definições</span>
+      </div>
+
     </nav>
 
-    <div class="car-card">
-        <div class="car-image">
-            <div class="car-roof"></div>
-            <div class="car-body"></div>
-            <div class="wheel one"></div>
-            <div class="wheel two"></div>
+    <div class="sidebar-bottom">
+
+      <div class="vehicle-card">
+
+        <!-- Model Y image from supplied reference -->
+        <img
+          class="vehicle-photo"
+          src="data:image/webp;base64,UklGRnoDAABXRUJQVlA4IG4DAAAQEwCdASp/AEAAPjEWiUMiISEVCm1EIAMEs4RIEuwAU/Xwn5dHyff/rycD/lXbI8bulHmlfTN7181//XjRtiMA9aeIXtPT2s8Ylp4+4Nm0jp2/6dS9unBswNetDywK7n+LzPvcuFcnxRXBw0gXpzBNYLalo+7salAcdNEDa3ldvm5RLQFiUdT7YumnyOrr/w34b4BIkSOYyeRXFc4cyNY4AAD+9k8v+j/lZ5V5p+HZIdIg+PTqGJxd5Z0vbBmCjxwOTp9+sDc8v09SPwcb9mzdIjOzW2rWHNsayWZgTHtXuCU97/0/Q//14AUNjq+LXqsL840BXPN2CBl3Epym//eR2QRBhwcYzL3yZuxQgV5MsvFnVukAgbw3HNwk6pNy4aONQcIi7YhdBwowdTRZlgn/uKalJmRDpg/CZ0vubAF1L76JoNUSra7RhvE+CpRUdTDZVgNoU8S87RLM2TJhsN/zmhMy5A95lUYnJMtkeEPGcVMdkpdT4nGWUS2ZAa2UtI4T6XwF9ewV/P05udbu8a1LIaVW/C3pZ01v8qcFvRAD8olDUlBWWyfEy7fgsMkiZJIuZdpDGdyzdplDbfyQ9VZXdEUSXeNzBILFvKjW6ts4mdPrj1p91K5B67c/madFT78sEwqKkwtlz7WwDouT/UiKk93lC9roqdrw0EDTJ0vzc/Val8Ja6z1thLxPXiLOF3KBjIhK6nzvyz381bUeVQLU/UBUaS3L6lk4sDmEu+NwHN91mtyzrfF0OxrW9Kr1cvPt8VwgaKOF3tTrtVSqedM6LiwN7dxhpF6L7AtkapO09frAB3YTXe3iGQ+OgE91a8hoJBgCVoseqSIK2AyR7C+pzPNKyjXFQ8NjOD7v88lEb17Jo267a1APkYPE2KzqA/PN2ET9cTkEix04xo79AkSfV7Y24b29svmsFaTiPCD22ftNMJkdnTfqskzYEZmU78C69JOtvE8VmV0O6lSKXeu87zH1RfABQIVbbt6mIRRLje5jTe3xrTC46oEYVhV8DGeMv7F6m/C/pZ5ZPTiqE2KMAr9GYHy/kJfuH85lNmy+KM2QELWh8UIjveFlJ16+XCfExlmr6V3IWdHHHii/0ZNGm9744uPwp5T8tdXV5u1VkX23YTKsF6Jg3DmpryqYNWCe8+0wnDRAFIEbzAAA=="
+          alt="Model Y"
+        >
+
+        <div class="vehicle-name">Model Y</div>
+        <div class="vehicle-model">Long Range Dual Motor</div>
+
+        <div class="vehicle-status">
+          <span class="status-dot"></span>
+          Ligado
         </div>
 
-        <div class="car-name">Model Y</div>
-        <div class="car-version">Long Range Dual Motor</div>
-        <div class="connected">● &nbsp;Ligado</div>
-    </div>
+        <div class="vehicle-chevron">›</div>
 
-    <div class="footer-side">
+      </div>
+
+      <div class="sidebar-footer">
         Tesla Track v1.0<br>
         O teu Tesla, em números.
+      </div>
+
     </div>
+  </aside>
 
-</aside>
 
+  <!-- MAIN -->
+  <main class="main">
+    <div class="content">
 
-<!-- MAIN -->
-<main class="main">
+      <!-- HERO -->
+      <section class="hero">
 
-<div class="dashboard">
+        <img
+          class="hero-photo"
+          src="data:image/webp;base64,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"
+          alt="Model Y"
+        >
 
-    <!-- HERO -->
-    <section class="hero">
+        <div class="hero-overlay"></div>
 
         <div class="hero-content">
+          <div class="hero-title">Olá!</div>
+          <div class="hero-subtitle">
+            Aqui está o resumo da tua<br>
+            Model Y de hoje.
+          </div>
 
-            <h1>Olá!</h1>
-
-            <p>
-                Aqui está o resumo da tua<br>
-                Model Y de hoje.
-            </p>
-
-            <div class="date">
-                ▣
-                <span id="date"></span>
-            </div>
-
+          <div class="date-pill">
+            <svg><use href="#calendar"/></svg>
+            Hoje, 8 de Jun de 2025
+          </div>
         </div>
 
-    </section>
+      </section>
 
 
-    <!-- METRICS -->
-    <section class="metrics">
+      <!-- METRICS -->
+      <section class="metrics">
 
         <div class="metric">
-
-            <div class="metric-icon icon-blue">▰</div>
-
-            <div class="metric-title">
-                Quilómetros hoje
-            </div>
-
-            <div class="metric-value">
-                82,4 <span>km</span>
-            </div>
-
-            <div class="change">
-                <strong>↑ 12%</strong> vs. ontem
-            </div>
-
+          <div class="metric-icon blue">
+            <svg><use href="#road"/></svg>
+          </div>
+          <div class="metric-label">Quilómetros hoje</div>
+          <div class="metric-value">82.4 <small>km</small></div>
+          <div class="metric-change"><strong>↑ 12%</strong> vs. ontem</div>
         </div>
-
 
         <div class="metric">
-
-            <div class="metric-icon icon-green">ϟ</div>
-
-            <div class="metric-title">
-                Energia usada
-            </div>
-
-            <div class="metric-value">
-                14,7 <span>kWh</span>
-            </div>
-
-            <div class="change">
-                <strong>↑ 8%</strong> vs. ontem
-            </div>
-
+          <div class="metric-icon green">
+            <svg><use href="#bolt"/></svg>
+          </div>
+          <div class="metric-label">Energia usada</div>
+          <div class="metric-value">14.7 <small>kWh</small></div>
+          <div class="metric-change"><strong>↑ 8%</strong> vs. ontem</div>
         </div>
-
 
         <div class="metric">
-
-            <div class="metric-icon icon-purple">◉</div>
-
-            <div class="metric-title">
-                Consumo médio
-            </div>
-
-            <div class="metric-value">
-                17,8 <span>kWh/100 km</span>
-            </div>
-
-            <div class="change">
-                <strong>↓ 4%</strong> vs. ontem
-            </div>
-
+          <div class="metric-icon purple">
+            <svg><use href="#gauge"/></svg>
+          </div>
+          <div class="metric-label">Consumo médio</div>
+          <div class="metric-value">17.8 <small>kWh/100 km</small></div>
+          <div class="metric-change"><strong>↓ 4%</strong> vs. ontem</div>
         </div>
-
 
         <div class="metric">
-
-            <div class="metric-icon icon-cyan">▣</div>
-
-            <div class="metric-title">
-                Bateria
-            </div>
-
-            <div class="metric-value">
-                68<span>%</span>
-            </div>
-
-            <div class="metric-small">
-                Autonomia estimada<br>
-                <strong style="font-size:14px;color:#eaf1fa">278 km</strong>
-            </div>
-
+          <div class="metric-icon cyan">
+            <svg><use href="#battery"/></svg>
+          </div>
+          <div class="metric-label">Bateria</div>
+          <div class="metric-value">68<small>%</small></div>
+          <div class="metric-change">Autonomia estimada<br><b style="color:#dce7f5;font-size:11px">278 km</b></div>
         </div>
-
 
         <div class="metric">
-
-            <div class="metric-icon icon-orange">€</div>
-
-            <div class="metric-title">
-                Custo de hoje
-            </div>
-
-            <div class="metric-value">
-                €2,87
-            </div>
-
-            <div class="change">
-                <strong>↑ 10%</strong> vs. ontem
-            </div>
-
+          <div class="metric-icon orange">
+            <svg><use href="#euro"/></svg>
+          </div>
+          <div class="metric-label">Custo de hoje</div>
+          <div class="metric-value">€2.87</div>
+          <div class="metric-change"><strong>↑ 10%</strong> vs. ontem</div>
         </div>
 
-    </section>
+      </section>
 
 
-    <!-- CONTENT -->
-    <section class="grid">
+      <!-- LOWER GRID -->
+      <section class="dashboard-grid">
 
-        <!-- LEFT -->
-        <div>
+        <!-- TRIPS -->
+        <div class="card">
 
-            <!-- TRIPS -->
-            <div class="card">
+          <div class="card-header">
 
-                <div class="card-header">
+            <div class="card-title-icon">
+              <svg><use href="#route"/></svg>
+            </div>
 
-                    <div class="card-title">
-                        <div class="card-title-icon">♧</div>
-                        Viagens de hoje
-                    </div>
+            <div>
+              <div class="card-title">Viagens de hoje</div>
+              <div class="card-subtitle">3 viagens registadas</div>
+            </div>
 
-                    <div class="card-link">
-                        Ver todas →
-                    </div>
+            <div class="view-all">
+              Ver todas <span>→</span>
+            </div>
 
-                </div>
+          </div>
 
-                <div class="subtitle">
-                    3 viagens registadas
-                </div>
+          <div class="trips">
 
+            <div class="trip">
+              <div class="trip-icon blue">
+                <svg><use href="#home"/></svg>
+              </div>
 
-                <div class="trip">
+              <div class="trip-route">
+                <div class="trip-name">Casa → Trabalho</div>
+                <div class="trip-time">08:12 - 08:45</div>
+              </div>
 
-                    <div class="trip-icon home">⌂</div>
+              <div class="trip-data">
+                <span>31,2 km</span>
+                <span>5,5 kWh</span>
+              </div>
 
-                    <div>
-                        <div class="trip-route">
-                            Casa → Trabalho
-                        </div>
-                        <div class="trip-time">
-                            08:12 - 08:45
-                        </div>
-                    </div>
-
-                    <div class="trip-data">
-                        31,2 km
-                    </div>
-
-                    <div class="trip-data">
-                        5,5 kWh
-                    </div>
-
-                    <div class="arrow">
-                        ›
-                    </div>
-
-                </div>
-
-
-                <div class="trip">
-
-                    <div class="trip-icon work">▣</div>
-
-                    <div>
-                        <div class="trip-route">
-                            Trabalho → Casa
-                        </div>
-                        <div class="trip-time">
-                            17:46 - 18:20
-                        </div>
-                    </div>
-
-                    <div class="trip-data">
-                        31,8 km
-                    </div>
-
-                    <div class="trip-data">
-                        5,6 kWh
-                    </div>
-
-                    <div class="arrow">
-                        ›
-                    </div>
-
-                </div>
-
-
-                <div class="trip">
-
-                    <div class="trip-icon pad">⌂</div>
-
-                    <div>
-                        <div class="trip-route">
-                            Casa → Padel
-                        </div>
-                        <div class="trip-time">
-                            21:05 - 21:32
-                        </div>
-                    </div>
-
-                    <div class="trip-data">
-                        19,4 km
-                    </div>
-
-                    <div class="trip-data">
-                        3,6 kWh
-                    </div>
-
-                    <div class="arrow">
-                        ›
-                    </div>
-
-                </div>
-
+              <div class="trip-arrow">›</div>
             </div>
 
 
-            <!-- COST -->
-            <div class="card cost-card">
+            <div class="trip">
+              <div class="trip-icon purple">
+                <svg><use href="#briefcase"/></svg>
+              </div>
 
-                <div class="card-header">
+              <div class="trip-route">
+                <div class="trip-name">Trabalho → Casa</div>
+                <div class="trip-time">17:46 - 18:20</div>
+              </div>
 
-                    <div class="card-title">
-                        <div class="card-title-icon" style="background:#d88522">
-                            €
-                        </div>
+              <div class="trip-data">
+                <span>31,8 km</span>
+                <span>5,6 kWh</span>
+              </div>
 
-                        Resumo de custos
-                    </div>
-
-                </div>
-
-                <div style="font-size:9px;color:#9db0c7;margin-left:46px;margin-top:-8px">
-                    Com base no preço da eletricidade definido
-                </div>
-
-                <div class="cost-value">
-                    € 43,20
-                </div>
-
-                <div class="cost-period">
-                    nos últimos 7 dias
-                </div>
-
-                <div class="price-badge">
-                    € 0,195 /kWh
-                </div>
-
-                <div class="electricity-link">
-                    Preço da eletricidade
-                </div>
-
-                <div class="progress">
-                    <span></span>
-                </div>
-
-                <div class="cost-stats">
-
-                    <div class="cost-stat">
-                        <div class="cost-stat-icon" style="color:#17cf8b">
-                            ⚡
-                        </div>
-
-                        <div>
-                            <div class="cost-stat-title">
-                                Energia total
-                            </div>
-
-                            <div class="cost-stat-value">
-                                221,4 kWh
-                            </div>
-                        </div>
-                    </div>
+              <div class="trip-arrow">›</div>
+            </div>
 
 
-                    <div class="cost-stat">
-                        <div class="cost-stat-icon" style="color:#ed8b21">
-                            €
-                        </div>
+            <div class="trip">
+              <div class="trip-icon green">
+                <svg><use href="#home"/></svg>
+              </div>
 
-                        <div>
-                            <div class="cost-stat-title">
-                                Custo total
-                            </div>
+              <div class="trip-route">
+                <div class="trip-name">Casa → Padel</div>
+                <div class="trip-time">21:05 - 21:32</div>
+              </div>
 
-                            <div class="cost-stat-value">
-                                € 43,20
-                            </div>
-                        </div>
-                    </div>
+              <div class="trip-data">
+                <span>19,4 km</span>
+                <span>3,6 kWh</span>
+              </div>
+
+              <div class="trip-arrow">›</div>
+            </div>
+
+          </div>
+        </div>
 
 
-                    <div class="cost-stat">
-                        <div class="cost-stat-icon" style="color:#1ad27f">
-                            ♧
-                        </div>
+        <!-- CONSUMPTION -->
+        <div class="card chart-card">
 
-                        <div>
-                            <div class="cost-stat-title">
-                                Custo por km
-                            </div>
+          <div class="card-header">
 
-                            <div class="cost-stat-value">
-                                € 0,53
-                            </div>
-                        </div>
-                    </div>
+            <div class="card-title-icon">
+              <svg><use href="#bolt"/></svg>
+            </div>
 
-                </div>
+            <div>
+              <div class="card-title">Consumo</div>
+              <div class="card-subtitle">Últimos 7 dias</div>
+            </div>
+
+          </div>
+
+          <div class="chart-area">
+
+            <div class="chart">
+
+              <svg viewBox="0 0 330 155" preserveAspectRatio="none">
+
+                <!-- horizontal grid -->
+                <path d="M26 15H316 M26 55H316 M26 95H316 M26 135H316"
+                      stroke="#173a5b" stroke-width="1"/>
+
+                <!-- vertical grid -->
+                <path d="M26 15V135 M71 15V135 M116 15V135 M161 15V135 M206 15V135 M251 15V135 M316 15V135"
+                      stroke="#143451" stroke-width="1"/>
+
+                <!-- area -->
+                <path d="
+                  M26 74
+                  C45 67,55 62,71 65
+                  C88 68,99 85,116 89
+                  C131 92,145 73,161 70
+                  C177 67,190 82,206 80
+                  C223 78,235 54,251 56
+                  C273 58,292 73,316 68
+                  L316 135
+                  L26 135 Z"
+                  fill="rgba(23,111,220,.20)"
+                />
+
+                <!-- line -->
+                <path d="
+                  M26 74
+                  C45 67,55 62,71 65
+                  C88 68,99 85,116 89
+                  C131 92,145 73,161 70
+                  C177 67,190 82,206 80
+                  C223 78,235 54,251 56
+                  C273 58,292 73,316 68"
+                  fill="none"
+                  stroke="#247fe8"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+
+                <circle cx="26" cy="74" r="3.2" fill="#247fe8"/>
+                <circle cx="71" cy="65" r="3.2" fill="#247fe8"/>
+                <circle cx="116" cy="89" r="3.2" fill="#247fe8"/>
+                <circle cx="161" cy="70" r="3.2" fill="#247fe8"/>
+                <circle cx="206" cy="80" r="3.2" fill="#247fe8"/>
+                <circle cx="251" cy="56" r="3.2" fill="#247fe8"/>
+                <circle cx="316" cy="68" r="3.2" fill="#247fe8"/>
+
+                <text x="3" y="18" fill="#91a7c0" font-size="9">30</text>
+                <text x="3" y="58" fill="#91a7c0" font-size="9">20</text>
+                <text x="3" y="98" fill="#91a7c0" font-size="9">10</text>
+                <text x="8" y="138" fill="#91a7c0" font-size="9">0</text>
+
+              </svg>
 
             </div>
+
+            <div class="chart-labels">
+              <span>2 Jun</span>
+              <span>3 Jun</span>
+              <span>4 Jun</span>
+              <span>5 Jun</span>
+              <span>6 Jun</span>
+              <span>7 Jun</span>
+              <span>8 Jun</span>
+            </div>
+
+            <div class="average">
+
+              <div class="average-icon">
+                <svg><use href="#bolt"/></svg>
+              </div>
+
+              <div class="average-text">
+                <div class="average-label">Média dos últimos 7 dias</div>
+                <div class="average-value">17,9 kWh/100 km</div>
+              </div>
+
+              <div class="average-change">⌁ ↓ 6%</div>
+
+            </div>
+
+          </div>
 
         </div>
 
 
-        <!-- RIGHT -->
-        <div>
+        <!-- COST SUMMARY -->
+        <div class="card cost-card">
 
-            <!-- CHART -->
-            <div class="card chart-card">
+          <div class="card-header">
 
-                <div class="card-header">
+            <div class="card-title-icon orange">
+              <svg><use href="#euro"/></svg>
+            </div>
 
-                    <div class="card-title">
+            <div>
+              <div class="card-title">Resumo de custos</div>
+              <div class="card-subtitle">Com base no preço da eletricidade definido</div>
+            </div>
 
-                        <div class="card-title-icon">
-                            ⚡
-                        </div>
+          </div>
 
-                        Consumo
+          <div class="cost-body">
 
-                    </div>
+            <div class="cost-top">
 
-                </div>
+              <div>
+                <div class="cost-total">€ 43,20</div>
+                <div class="cost-period">nos últimos 7 dias</div>
+              </div>
 
-                <div class="subtitle">
-                    Últimos 7 dias
-                </div>
-
-
-                <div class="chart">
-
-                    <div class="chart-labels-y">
-                        <span>30</span>
-                        <span>20</span>
-                        <span>10</span>
-                        <span>0</span>
-                    </div>
-
-                    <div class="chart-line">
-
-                        <svg viewBox="0 0 500 130"
-                             preserveAspectRatio="none">
-
-                            <defs>
-
-                                <linearGradient
-                                    id="area"
-                                    x1="0"
-                                    y1="0"
-                                    x2="0"
-                                    y2="1">
-
-                                    <stop
-                                        offset="0%"
-                                        stop-color="#177ce9"
-                                        stop-opacity=".55"/>
-
-                                    <stop
-                                        offset="100%"
-                                        stop-color="#177ce9"
-                                        stop-opacity=".03"/>
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <path
-                                d="M0 69
-                                   C35 48,48 48,75 60
-                                   C100 71,112 78,142 92
-                                   C170 104,190 82,214 64
-                                   C240 45,252 65,285 78
-                                   C315 92,333 66,360 53
-                                   C390 38,415 25,442 37
-                                   C463 47,478 60,500 62
-                                   L500 130
-                                   L0 130 Z"
-                                fill="url(#area)"/>
-
-                            <path
-                                d="M0 69
-                                   C35 48,48 48,75 60
-                                   C100 71,112 78,142 92
-                                   C170 104,190 82,214 64
-                                   C240 45,252 65,285 78
-                                   C315 92,333 66,360 53
-                                   C390 38,415 25,442 37
-                                   C463 47,478 60,500 62"
-                                fill="none"
-                                stroke="#2587f5"
-                                stroke-width="3"
-                                vector-effect="non-scaling-stroke"/>
-
-                            <g fill="#2388f6">
-                                <circle cx="0" cy="69" r="4"/>
-                                <circle cx="75" cy="60" r="4"/>
-                                <circle cx="142" cy="92" r="4"/>
-                                <circle cx="214" cy="64" r="4"/>
-                                <circle cx="285" cy="78" r="4"/>
-                                <circle cx="360" cy="53" r="4"/>
-                                <circle cx="442" cy="37" r="4"/>
-                                <circle cx="500" cy="62" r="4"/>
-                            </g>
-
-                        </svg>
-
-                    </div>
-
-                </div>
-
-
-                <div class="chart-days">
-                    <span>2 Jun</span>
-                    <span>3 Jun</span>
-                    <span>4 Jun</span>
-                    <span>5 Jun</span>
-                    <span>6 Jun</span>
-                    <span>7 Jun</span>
-                    <span>8 Jun</span>
-                </div>
-
-
-                <div class="average">
-
-                    <div class="average-icon">
-                        ⚡
-                    </div>
-
-                    <div>
-                        <div class="average-text">
-                            Média dos últimos 7 dias
-                        </div>
-
-                        <div class="average-value">
-                            17,9 kWh/100 km
-                        </div>
-                    </div>
-
-                    <div class="average-change">
-                        ↘ ↓ 6%
-                    </div>
-
-                </div>
+              <div>
+                <div class="price-pill">€ 0,195 /kWh</div>
+                <div class="price-label">Preço da eletricidade</div>
+              </div>
 
             </div>
 
+            <div class="progress">
+              <span></span>
+            </div>
 
-            <!-- SETTINGS -->
-            <div class="card settings">
+            <div class="cost-stats">
 
-                <div class="card-title">
-
-                    <div class="card-title-icon"
-                         style="background:#3c5a7c">
-                        ⚙
-                    </div>
-
-                    Definições
-
+              <div class="cost-stat">
+                <div class="cost-stat-icon" style="color:#17c978">
+                  <svg><use href="#bolt"/></svg>
                 </div>
-
-
-                <div class="setting-label">
-                    Preço da eletricidade (€/kWh)
+                <div>
+                  <div class="stat-label">Energia total</div>
+                  <div class="stat-value">221,4 kWh</div>
                 </div>
+              </div>
 
-                <div class="input-row">
-
-                    <input
-                        id="electricityPrice"
-                        type="number"
-                        step="0.001"
-                        min="0"
-                        value="0.195">
-
-                    <button
-                        class="save"
-                        onclick="savePrice()">
-                        Guardar
-                    </button>
-
+              <div class="cost-stat">
+                <div class="cost-stat-icon" style="color:#ef8725">
+                  <svg><use href="#euro"/></svg>
                 </div>
-
-
-                <div class="divider"></div>
-
-
-                <div class="version">
-
-                    <div class="version-left">
-
-                        <div class="mini-tesla">
-                            T
-                        </div>
-
-                        <div>
-
-                            <div class="version-name">
-                                Tesla Track
-                            </div>
-
-                            <div class="version-sub">
-                                V1.0 - Dados de demonstração
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div style="font-size:21px;color:#91a6bc">
-                        ›
-                    </div>
-
+                <div>
+                  <div class="stat-label">Custo total</div>
+                  <div class="stat-value">€ 43,20</div>
                 </div>
+              </div>
+
+              <div class="cost-stat">
+                <div class="cost-stat-icon" style="color:#20c77a">
+                  <svg><use href="#leaf"/></svg>
+                </div>
+                <div>
+                  <div class="stat-label">Custo por km</div>
+                  <div class="stat-value">€ 0,53</div>
+                </div>
+              </div>
 
             </div>
+
+          </div>
 
         </div>
 
-    </section>
 
-</div>
+        <!-- SETTINGS -->
+        <div class="card settings-card">
 
-</main>
+          <div class="card-header">
 
-</div>
+            <div class="card-title-icon gray">
+              <svg><use href="#gear"/></svg>
+            </div>
 
+            <div>
+              <div class="card-title">Definições</div>
+            </div>
 
-<div class="toast" id="toast">
-    Preço da eletricidade guardado.
+          </div>
+
+          <div class="settings-body">
+
+            <div class="setting-label">
+              Preço da eletricidade (€/kWh)
+            </div>
+
+            <div class="setting-row">
+
+              <input
+                id="electricityPrice"
+                class="setting-input"
+                type="number"
+                step="0.001"
+                value="0.195"
+              >
+
+              <button class="save-btn" onclick="savePrice()">
+                Guardar
+              </button>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="version-row">
+
+              <img
+                class="version-logo"
+                src="data:image/webp;base64,UklGRiQCAABXRUJQVlA4IBgCAADwCwCdASozAC4APjEUiUMiISEWrmQAIAMEtIBhu71P5XyiB9D9vzhf9O+VXMW/zb8iNRd1In+j9Hz+18x/0F/t/VS/yYh38dyf3lMGMO26rcUpGGK3tWcl4cylQPVCYM5w8g73fqa90AD+/5KsWpgIizixEby+iLDGqiozJkMjKIatUtlVf96bZ/WqE7H0nticf/tRHDnovhic8mKdH8Vcu9lOuL/DTh7elG7VSnbN6m/x/Y7izsCMHetehXkUvmS+jfO/lkmtGmsLioc/6nkDAyjwTvnP+BWzhyt/5u5Lze2tC9zAX/2db2vXcko2/GKyM32e3/vkc3O6RDPkEV/0tt8maPEmDkn/e8gf/8lODFS8pUTUnHQ1seCV/hJq3/6aqI45zZmBYD7ubzjCMNhUiwSPhGH+mXY/j8SlGO1e62/YzDCkgGxnUxzAc34xZSyBoPlNK0FJ8+h42H7li7js5TQtaFKSVlC7BWkdEcifgfwXhCz667SXN/Eyb8LtD0lUEc/GaqcpQthQ4MCbsw4fvASYEFNZZrH03McLy42CIKWzkxNuw/0bfSCUFhF7rtZBWQu1cOEua+Lc5zx9zfbfy3vVR/t4Etev/MlFldpItWuv4Gogc/Vj2BlYermBRfVIzn0VTd4QGGhw8Wa0XPjJ5a/h9HSniTOf33bKja1gPObI86pAJGm4ip2NgVOC15h5ni4bZYqAAA=="
+                alt="Tesla"
+              >
+
+              <div>
+                <div class="version-name">Tesla Track</div>
+                <div class="version-sub">V1.0 - Dados de demonstração</div>
+              </div>
+
+              <div class="version-arrow">›</div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
 </div>
 
 
 <script>
-
-/* Data */
-const now = new Date();
-
-const formattedDate =
-    now.toLocaleDateString(
-        "pt-PT",
-        {
-            day:"numeric",
-            month:"short",
-            year:"numeric"
-        }
-    );
-
-document.getElementById("date").textContent =
-    "Hoje, " + formattedDate;
-
-
-/* Electricity price */
-const input =
-    document.getElementById("electricityPrice");
-
-const saved =
-    localStorage.getItem("teslaElectricityPrice");
-
-if(saved){
-    input.value = saved;
-}
-
-
-/* Save */
 function savePrice(){
 
-    const value = input.value;
+  const input = document.getElementById("electricityPrice");
+  const value = parseFloat(input.value);
 
-    if(value === "" || Number(value) < 0){
-        return;
-    }
+  if(!isNaN(value) && value >= 0){
+    localStorage.setItem("teslaTrackElectricityPrice", value.toString());
 
-    localStorage.setItem(
-        "teslaElectricityPrice",
-        value
-    );
+    const button = document.querySelector(".save-btn");
+    const original = button.textContent;
 
-    const toast =
-        document.getElementById("toast");
+    button.textContent = "Guardado ✓";
 
-    toast.classList.add("show");
-
-    setTimeout(function(){
-        toast.classList.remove("show");
-    },2000);
+    setTimeout(()=>{
+      button.textContent = original;
+    },1500);
+  }
 }
 
+document.addEventListener("DOMContentLoaded",()=>{
 
-/* Menu */
-document.querySelectorAll(".menu a")
-.forEach(function(link){
+  const saved = localStorage.getItem("teslaTrackElectricityPrice");
 
-    link.addEventListener("click",function(e){
-
-        e.preventDefault();
-
-        document
-        .querySelectorAll(".menu a")
-        .forEach(function(item){
-            item.classList.remove("active");
-        });
-
-        this.classList.add("active");
-
-    });
+  if(saved){
+    document.getElementById("electricityPrice").value = saved;
+  }
 
 });
-
 </script>
 
 </body>
