@@ -2,60 +2,48 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tesla Track</title>
 
 <style>
 :root{
   --bg:#061525;
-  --bg2:#081b30;
-  --card:#0b2139;
-  --card2:#0d2743;
-  --border:#173a5d;
-  --text:#eef5ff;
-  --muted:#9db2ca;
-  --blue:#1677ee;
-  --blue2:#0b5fca;
-  --green:#21c978;
-  --purple:#7145e8;
-  --cyan:#12c3c8;
-  --orange:#ef8725;
-  --red:#ef5757;
+  --panel:#0a2037;
+  --panel2:#0d2742;
+  --line:#183b5d;
+  --text:#f3f7fc;
+  --muted:#9db1c8;
+  --blue:#1677eb;
+  --green:#19c878;
+  --purple:#7346e6;
+  --cyan:#12bec4;
+  --orange:#ec8425;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,body{
   margin:0;
-  padding:0;
-  width:100%;
   min-height:100%;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   background:var(--bg);
   color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-body{
-  overflow-x:hidden;
-}
-
-button,
-input{
-  font:inherit;
-}
+body{overflow-x:hidden}
 
 svg{
   display:block;
+  width:100%;
+  height:100%;
 }
 
 .app{
-  display:flex;
   min-height:100vh;
+  display:flex;
   background:
-    radial-gradient(circle at 80% 0%,rgba(18,82,145,.12),transparent 32%),
-    linear-gradient(135deg,#061525,#07182a 55%,#061424);
+    radial-gradient(circle at 85% 0%,rgba(22,95,165,.12),transparent 30%),
+    #061525;
 }
 
 /* =========================
@@ -64,143 +52,153 @@ svg{
 
 .sidebar{
   width:187px;
-  flex:none;
+  flex-shrink:0;
   min-height:100vh;
   padding:24px 13px 18px;
+  background:#071a2d;
   border-right:1px solid rgba(75,126,176,.15);
-  background:
-    linear-gradient(180deg,#071a2d 0%,#061526 70%,#051321 100%);
   display:flex;
   flex-direction:column;
 }
 
 .brand{
   text-align:center;
-  margin-bottom:28px;
+  margin-bottom:27px;
 }
 
 .tesla-logo{
-  width:46px;
+  width:42px;
   height:42px;
   object-fit:contain;
-  margin:0 auto 10px;
-  filter:brightness(1.12);
+  margin:auto;
+  display:block;
 }
 
 .brand-name{
-  font-size:19px;
-  font-weight:700;
-  letter-spacing:.2px;
+  margin-top:9px;
+  font-size:18px;
+  font-weight:750;
+  letter-spacing:.3px;
 }
 
 .brand-name span{
-  color:#1979ed;
+  color:#1778ed;
 }
 
 .nav{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:6px;
 }
 
 .nav-item{
-  height:47px;
+  height:46px;
   border-radius:11px;
-  padding:0 12px;
   display:flex;
   align-items:center;
-  gap:13px;
-  color:#b8c8dc;
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.nav-item:hover{
-  background:rgba(24,117,234,.12);
-  color:white;
+  gap:12px;
+  padding:0 12px;
+  color:#aebfd3;
+  font-size:12px;
+  font-weight:650;
 }
 
 .nav-item.active{
   color:white;
-  background:linear-gradient(90deg,#0870df,#0755aa);
-  box-shadow:0 8px 20px rgba(0,93,195,.18);
+  background:linear-gradient(90deg,#0870df,#0757b1);
+  box-shadow:0 7px 20px rgba(0,92,190,.2);
 }
 
-.nav-icon{
-  width:20px;
-  height:20px;
+.nav-svg{
+  width:19px;
+  height:19px;
   flex:none;
 }
 
-.sidebar-bottom{
+.vehicle-wrap{
   margin-top:auto;
 }
 
 .vehicle-card{
-  min-height:149px;
-  border-radius:12px;
-  border:1px solid rgba(51,105,153,.3);
-  background:
-    linear-gradient(180deg,rgba(14,40,66,.94),rgba(8,27,45,.94));
-  padding:9px 9px 10px;
   position:relative;
+  height:151px;
+  border:1px solid #204665;
+  border-radius:13px;
+  background:linear-gradient(160deg,#102e4b,#081e34);
   overflow:hidden;
+  padding:8px 10px;
 }
 
 .vehicle-photo{
   width:100%;
-  height:59px;
-  object-fit:contain;
+  height:66px;
+  object-fit:cover;
+  object-position:center 48%;
+  border-radius:7px;
   display:block;
-  margin-bottom:2px;
-  opacity:.95;
+}
+
+.vehicle-photo.hidden{
+  display:none;
+}
+
+.vehicle-fallback{
+  display:none;
+  height:66px;
+  align-items:center;
+  justify-content:center;
+  color:#9fb5cb;
+  font-size:10px;
+}
+
+.vehicle-photo.hidden + .vehicle-fallback{
+  display:flex;
 }
 
 .vehicle-name{
+  margin:7px 15px 1px;
   font-size:13px;
-  font-weight:700;
-  margin:1px 8px 2px;
+  font-weight:750;
 }
 
 .vehicle-model{
+  margin:0 15px;
   font-size:9.5px;
-  color:#aebfd2;
-  margin:0 8px 13px;
+  color:#a9bdd3;
 }
 
 .vehicle-status{
+  position:absolute;
+  left:17px;
+  bottom:14px;
   display:flex;
   align-items:center;
   gap:7px;
+  color:#18cc79;
   font-size:10px;
-  font-weight:600;
-  color:#26ce7b;
-  margin-left:8px;
+  font-weight:700;
 }
 
 .status-dot{
   width:8px;
   height:8px;
-  background:#1fc878;
   border-radius:50%;
-  box-shadow:0 0 10px rgba(31,200,120,.35);
+  background:#19ca78;
 }
 
-.vehicle-chevron{
+.vehicle-arrow{
   position:absolute;
-  right:13px;
-  bottom:37px;
-  color:#9db1c9;
+  right:15px;
+  bottom:29px;
+  color:#9db1c7;
   font-size:22px;
 }
 
 .sidebar-footer{
-  padding:19px 2px 0;
-  color:#7189a4;
-  font-size:9.5px;
-  line-height:1.55;
+  color:#718aa5;
+  font-size:9px;
+  line-height:1.5;
+  padding:17px 2px 0;
 }
 
 /* =========================
@@ -210,13 +208,13 @@ svg{
 .main{
   flex:1;
   min-width:0;
-  padding:25px 14px 20px 20px;
+  padding:25px 15px 25px 20px;
 }
 
 .content{
   width:100%;
   max-width:765px;
-  margin:0 auto;
+  margin:auto;
 }
 
 /* =========================
@@ -224,12 +222,12 @@ svg{
 ========================= */
 
 .hero{
-  height:191px;
-  border-radius:12px;
-  overflow:hidden;
   position:relative;
-  border:1px solid rgba(52,104,154,.27);
-  background:#102b49;
+  height:191px;
+  overflow:hidden;
+  border:1px solid #173d61;
+  border-radius:13px;
+  background:#102b47;
 }
 
 .hero-photo{
@@ -238,7 +236,26 @@ svg{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center;
+  object-position:center 56%;
+  filter:saturate(.75) brightness(.72);
+  transform:scale(1.04);
+}
+
+.hero-photo.hidden{
+  display:none;
+}
+
+.hero-fallback{
+  position:absolute;
+  inset:0;
+  display:none;
+  background:
+    radial-gradient(circle at 80% 45%,#48617a 0,#1c344d 25%,transparent 50%),
+    linear-gradient(135deg,#102a44,#071a2d);
+}
+
+.hero-photo.hidden + .hero-fallback{
+  display:block;
 }
 
 .hero-overlay{
@@ -246,51 +263,49 @@ svg{
   inset:0;
   background:
     linear-gradient(90deg,
-      rgba(7,25,44,.96) 0%,
-      rgba(7,25,44,.87) 33%,
-      rgba(7,25,44,.42) 58%,
-      rgba(7,25,44,.05) 100%);
+      rgba(5,22,39,.98) 0%,
+      rgba(5,22,39,.91) 32%,
+      rgba(5,22,39,.55) 57%,
+      rgba(5,22,39,.15) 100%);
 }
 
 .hero-content{
   position:relative;
   z-index:2;
-  padding:31px 20px;
+  padding:30px 20px;
 }
 
 .hero-title{
-  font-size:27px;
-  line-height:1.05;
-  font-weight:750;
-  margin-bottom:7px;
+  font-size:28px;
+  line-height:1;
+  font-weight:800;
 }
 
 .hero-subtitle{
+  margin-top:13px;
+  color:#b8c9dc;
   font-size:16px;
   line-height:1.35;
-  color:#afc1d8;
-  max-width:260px;
 }
 
 .date-pill{
-  margin-top:20px;
   display:inline-flex;
   align-items:center;
   gap:9px;
-  height:34px;
+  margin-top:20px;
+  height:35px;
   padding:0 13px;
-  border:1px solid rgba(83,133,180,.35);
-  background:rgba(5,23,41,.65);
-  border-radius:18px;
-  color:#d6e1ef;
-  font-size:11px;
-  font-weight:600;
-  backdrop-filter:blur(7px);
+  border:1px solid #244c70;
+  border-radius:20px;
+  background:rgba(5,22,39,.72);
+  color:#d8e4f0;
+  font-size:10px;
+  font-weight:700;
 }
 
-.date-pill svg{
-  width:16px;
-  height:16px;
+.date-icon{
+  width:17px;
+  height:17px;
 }
 
 /* =========================
@@ -301,244 +316,185 @@ svg{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:14px;
-  margin-top:16px;
+  margin-top:15px;
 }
 
 .metric{
   min-width:0;
-  min-height:180px;
+  height:179px;
+  padding:15px;
+  border:1px solid #173a5b;
   border-radius:12px;
-  border:1px solid rgba(44,91,134,.43);
-  background:
-    linear-gradient(145deg,rgba(13,39,65,.98),rgba(8,28,47,.98));
-  padding:16px 15px;
+  background:linear-gradient(145deg,#0d2945,#091f35);
 }
 
 .metric-icon{
   width:43px;
   height:43px;
-  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:17px;
+  border-radius:50%;
+  margin-bottom:16px;
 }
 
 .metric-icon svg{
   width:22px;
   height:22px;
-  stroke:white;
+  color:white;
 }
 
-.metric-icon.blue{
-  background:#075cc9;
-}
-
-.metric-icon.green{
-  background:#0caf61;
-}
-
-.metric-icon.purple{
-  background:#6941df;
-}
-
-.metric-icon.cyan{
-  background:#08b8bf;
-}
-
-.metric-icon.orange{
-  background:#e87e22;
-}
+.blue{background:#075ecb}
+.green{background:#0cad62}
+.purple{background:#7044df}
+.cyan{background:#0ab8bf}
+.orange{background:#e98023}
 
 .metric-label{
-  color:#b8c8dc;
-  font-size:12px;
-  font-weight:600;
+  font-size:11px;
+  font-weight:650;
+  color:#b2c4d8;
   white-space:nowrap;
 }
 
 .metric-value{
   margin-top:8px;
-  font-size:25px;
-  font-weight:750;
-  white-space:nowrap;
+  font-size:23px;
+  font-weight:800;
   letter-spacing:-.5px;
+  white-space:nowrap;
 }
 
 .metric-value small{
+  color:#b2c4d8;
   font-size:9px;
-  font-weight:600;
-  color:#b8c8dc;
-  letter-spacing:0;
+  font-weight:650;
 }
 
 .metric-change{
-  margin-top:13px;
-  font-size:10px;
-  color:#9fb2c9;
+  margin-top:12px;
+  color:#8fa7c0;
+  font-size:9px;
   white-space:nowrap;
 }
 
-.metric-change strong{
-  color:#22d17d;
-}
-
-/* =========================
-   GRID
-========================= */
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:1.07fr .93fr;
-  gap:15px;
-  margin-top:17px;
-}
-
-.card{
-  border-radius:12px;
-  border:1px solid rgba(44,91,134,.43);
-  background:
-    linear-gradient(145deg,rgba(12,36,60,.98),rgba(7,26,44,.98));
-  overflow:hidden;
-}
-
-.card-header{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:15px 16px 5px;
-}
-
-.card-title-icon{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex:none;
-  background:#0b66d5;
-}
-
-.card-title-icon.green{
-  background:#10ae65;
-}
-
-.card-title-icon.orange{
-  background:#e68123;
-}
-
-.card-title-icon.gray{
-  background:#58718e;
-}
-
-.card-title-icon svg{
-  width:18px;
-  height:18px;
-  stroke:white;
-}
-
-.card-title{
-  font-size:15px;
+.positive{
+  color:#20d27f;
   font-weight:700;
 }
 
-.card-subtitle{
-  color:#9db1c9;
-  font-size:9.5px;
-  margin-top:3px;
+/* =========================
+   LOWER
+========================= */
+
+.lower{
+  display:grid;
+  grid-template-columns:1.07fr .93fr;
+  gap:15px;
+  margin-top:16px;
 }
 
-.view-all{
-  margin-left:auto;
-  color:#1680ed;
-  font-size:10px;
-  font-weight:600;
+.card{
+  min-width:0;
+  border:1px solid #173a5b;
+  border-radius:12px;
+  background:linear-gradient(145deg,#0d2945,#081e34);
+  overflow:hidden;
+}
+
+.card-head{
   display:flex;
   align-items:center;
-  gap:6px;
+  padding:14px 15px 7px;
+  gap:10px;
 }
 
-.view-all span{
-  font-size:17px;
+.card-icon{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  padding:7px;
+  flex:none;
+}
+
+.card-icon.blue{background:#0969d5}
+.card-icon.green{background:#0dae64}
+.card-icon.orange{background:#e98225}
+.card-icon.gray{background:#526c87}
+
+.card-title{
+  font-size:14px;
+  font-weight:750;
+}
+
+.card-subtitle{
+  margin-top:3px;
+  color:#879fb9;
+  font-size:8.5px;
+}
+
+.card-link{
+  margin-left:auto;
+  color:#1681ee;
+  font-size:9px;
+  font-weight:700;
 }
 
 /* =========================
    TRIPS
 ========================= */
 
-.trips{
-  padding:5px 14px 16px;
+.trip-list{
+  padding:4px 13px 14px;
 }
 
 .trip{
   height:63px;
-  border:1px solid #183e63;
-  border-radius:13px;
-  background:linear-gradient(90deg,#0c2946,#0a223b);
   margin-top:8px;
+  padding:0 10px;
   display:flex;
   align-items:center;
-  padding:0 10px;
   gap:10px;
+  border:1px solid #193f62;
+  border-radius:12px;
+  background:#0b2946;
 }
 
 .trip-icon{
   width:35px;
   height:35px;
+  padding:8px;
   border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   flex:none;
 }
 
-.trip-icon.blue{
-  background:#096bd8;
-}
-
-.trip-icon.purple{
-  background:#6b40dd;
-}
-
-.trip-icon.green{
-  background:#12ae66;
-}
-
-.trip-icon svg{
-  width:18px;
-  height:18px;
-  stroke:white;
-}
-
-.trip-route{
+.trip-main{
   min-width:0;
   flex:1;
 }
 
 .trip-name{
-  font-size:11px;
-  font-weight:700;
-  white-space:nowrap;
+  font-size:10px;
+  font-weight:750;
 }
 
 .trip-time{
-  font-size:9px;
-  color:#a2b5cb;
   margin-top:5px;
+  color:#91a8c0;
+  font-size:8px;
 }
 
 .trip-data{
   display:flex;
-  gap:20px;
-  font-size:9px;
+  gap:13px;
+  font-size:8.5px;
   white-space:nowrap;
 }
 
-.trip-arrow{
-  color:#b4c4d7;
-  font-size:20px;
-  margin-left:2px;
+.chevron{
+  width:15px;
+  height:15px;
+  color:#9eb1c6;
 }
 
 /* =========================
@@ -546,57 +502,43 @@ svg{
 ========================= */
 
 .chart-card{
-  min-height:320px;
+  min-height:270px;
 }
 
-.chart-area{
-  padding:10px 14px 14px;
+.chart-box{
+  padding:6px 14px 14px;
 }
 
 .chart{
   width:100%;
-  height:155px;
-  position:relative;
-}
-
-.chart svg{
-  width:100%;
-  height:100%;
+  height:142px;
 }
 
 .chart-labels{
   display:flex;
   justify-content:space-between;
-  color:#8fa6bf;
-  font-size:8px;
-  margin:0 13px;
+  color:#8098b2;
+  font-size:7.5px;
+  padding:0 5px;
 }
 
 .average{
+  height:50px;
   margin-top:14px;
-  border-radius:11px;
-  height:51px;
-  background:linear-gradient(90deg,#0d3153,#0c2947);
+  padding:0 11px;
   display:flex;
   align-items:center;
-  padding:0 12px;
-  gap:11px;
+  gap:10px;
+  border-radius:10px;
+  background:#0d3152;
 }
 
 .average-icon{
   width:27px;
   height:27px;
+  padding:6px;
   border-radius:50%;
-  background:#0868d9;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.average-icon svg{
-  width:15px;
-  height:15px;
-  stroke:#fff;
+  background:#086bdc;
 }
 
 .average-text{
@@ -604,228 +546,214 @@ svg{
 }
 
 .average-label{
-  color:#91a9c2;
-  font-size:8.5px;
+  color:#8da5be;
+  font-size:8px;
 }
 
 .average-value{
-  margin-top:2px;
-  font-size:12px;
-  font-weight:700;
+  margin-top:3px;
+  font-size:11px;
+  font-weight:750;
 }
 
 .average-change{
-  font-size:9px;
-  color:#1bd079;
+  color:#1bd07c;
+  font-size:8px;
 }
 
 /* =========================
-   COSTS
+   COST
 ========================= */
 
-.cost-card{
-  min-height:215px;
+.cost-card,
+.settings-card{
+  min-height:210px;
 }
 
 .cost-body{
-  padding:7px 15px 15px;
+  padding:5px 15px 15px;
 }
 
 .cost-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
 }
 
-.cost-total{
+.cost-value{
   font-size:24px;
-  font-weight:750;
+  font-weight:800;
 }
 
 .cost-period{
-  color:#a0b3c9;
-  font-size:9px;
   margin-top:2px;
+  color:#8da5bd;
+  font-size:8px;
 }
 
 .price-pill{
-  padding:8px 11px;
-  border:1px solid #28527b;
-  background:#102e4d;
-  border-radius:18px;
-  color:#dbe8f7;
-  font-size:9px;
+  padding:7px 10px;
+  border:1px solid #285477;
+  border-radius:17px;
+  background:#102f4e;
+  color:#d9e5f1;
+  font-size:8px;
 }
 
-.price-label{
+.price-text{
   text-align:right;
-  color:#1681ed;
-  font-size:8px;
   margin-top:3px;
+  color:#1681ec;
+  font-size:7px;
 }
 
 .progress{
-  height:12px;
-  border-radius:8px;
-  margin:15px 0 16px;
-  background:#153654;
+  height:10px;
+  margin:15px 0;
+  border-radius:10px;
   overflow:hidden;
+  background:#153653;
 }
 
 .progress span{
   display:block;
   width:53%;
   height:100%;
-  border-radius:8px;
-  background:linear-gradient(90deg,#13b9a0,#9bcf4c);
+  border-radius:10px;
+  background:linear-gradient(90deg,#13b8a1,#a4ce4c);
 }
 
-.cost-stats{
+.stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
 }
 
-.cost-stat{
+.stat{
   display:flex;
   align-items:center;
-  gap:8px;
-  min-width:0;
+  gap:7px;
 }
 
-.cost-stat + .cost-stat{
-  border-left:1px solid #1a3b5c;
-  padding-left:17px;
+.stat+.stat{
+  border-left:1px solid #1b3c5b;
+  padding-left:12px;
 }
 
-.cost-stat-icon{
-  width:23px;
-  height:23px;
-  flex:none;
-}
-
-.cost-stat-icon svg{
-  width:100%;
-  height:100%;
+.stat-icon{
+  width:21px;
+  height:21px;
 }
 
 .stat-label{
-  color:#8ea7c0;
-  font-size:8px;
-  white-space:nowrap;
+  color:#819ab4;
+  font-size:7px;
 }
 
 .stat-value{
-  font-size:10px;
-  font-weight:700;
   margin-top:3px;
+  font-size:9px;
+  font-weight:750;
 }
 
 /* =========================
    SETTINGS
 ========================= */
 
-.settings-card{
-  min-height:215px;
-}
-
 .settings-body{
-  padding:8px 15px 13px;
+  padding:7px 15px 15px;
 }
 
-.setting-label{
-  color:#9db0c6;
-  font-size:10px;
+.input-label{
+  color:#91a8c0;
+  font-size:9px;
   margin-bottom:7px;
 }
 
-.setting-row{
+.input-row{
   display:flex;
   gap:8px;
 }
 
-.setting-input{
+.input{
   flex:1;
   min-width:0;
-  height:35px;
-  border-radius:10px;
-  border:1px solid #234c73;
+  height:34px;
+  padding:0 10px;
+  border:1px solid #244d72;
+  border-radius:9px;
   outline:none;
   background:#102d4b;
-  color:#e9f1fa;
-  padding:0 11px;
-  font-size:11px;
-}
-
-.save-btn{
-  height:35px;
-  padding:0 15px;
-  border:0;
-  border-radius:9px;
-  background:#1877e9;
   color:white;
   font-size:10px;
-  font-weight:700;
-  cursor:pointer;
 }
 
-.save-btn:hover{
-  background:#2584f3;
+.save{
+  height:34px;
+  padding:0 14px;
+  border:0;
+  border-radius:8px;
+  background:#1677eb;
+  color:white;
+  font-size:9px;
+  font-weight:750;
+  cursor:pointer;
 }
 
 .divider{
   height:1px;
+  margin:15px 0 12px;
   background:#193b5b;
-  margin:16px 0 13px;
 }
 
-.version-row{
+.version{
   display:flex;
   align-items:center;
-  gap:11px;
+  gap:10px;
 }
 
 .version-logo{
-  width:31px;
+  width:28px;
   height:28px;
   object-fit:contain;
 }
 
 .version-name{
-  font-size:11px;
-  font-weight:700;
+  font-size:10px;
+  font-weight:750;
 }
 
 .version-sub{
-  color:#829bb5;
-  font-size:8px;
   margin-top:3px;
+  color:#7892ac;
+  font-size:7.5px;
 }
 
 .version-arrow{
   margin-left:auto;
-  color:#a6b8cc;
-  font-size:20px;
+  color:#9eb2c7;
+  font-size:19px;
 }
 
 /* =========================
-   MOBILE
+   RESPONSIVE
 ========================= */
 
 @media(max-width:850px){
+
   .sidebar{
-    width:170px;
+    width:165px;
   }
 
   .metrics{
     grid-template-columns:repeat(3,1fr);
   }
 
-  .dashboard-grid{
+  .lower{
     grid-template-columns:1fr;
   }
 }
 
 @media(max-width:650px){
+
   .app{
     display:block;
   }
@@ -833,10 +761,9 @@ svg{
   .sidebar{
     width:100%;
     min-height:auto;
-    height:auto;
     padding:12px;
     border-right:0;
-    border-bottom:1px solid rgba(75,126,176,.15);
+    border-bottom:1px solid #17334e;
   }
 
   .brand{
@@ -848,28 +775,26 @@ svg{
   }
 
   .tesla-logo{
-    width:35px;
+    width:32px;
     height:32px;
     margin:0;
   }
 
   .brand-name{
-    font-size:17px;
+    margin:0;
   }
 
   .nav{
     flex-direction:row;
     overflow-x:auto;
-    padding-bottom:2px;
   }
 
   .nav-item{
     min-width:max-content;
-    height:39px;
-    padding:0 12px;
+    height:38px;
   }
 
-  .sidebar-bottom{
+  .vehicle-wrap{
     display:none;
   }
 
@@ -882,15 +807,11 @@ svg{
   }
 
   .hero-content{
-    padding:25px 18px;
+    padding:26px 18px;
   }
 
   .hero-title{
-    font-size:25px;
-  }
-
-  .hero-subtitle{
-    font-size:14px;
+    font-size:26px;
   }
 
   .metrics{
@@ -899,30 +820,14 @@ svg{
   }
 
   .metric{
-    min-height:155px;
-    padding:13px;
-  }
-
-  .metric-icon{
-    margin-bottom:12px;
-  }
-
-  .metric-value{
-    font-size:22px;
-  }
-
-  .dashboard-grid{
-    gap:10px;
+    height:155px;
   }
 }
 
 @media(max-width:390px){
+
   .metrics{
     grid-template-columns:1fr;
-  }
-
-  .hero-photo{
-    object-position:58% center;
   }
 }
 </style>
@@ -930,625 +835,829 @@ svg{
 
 <body>
 
-<!-- SVG ICON LIBRARY -->
+<!-- ICONS -->
 <svg width="0" height="0" style="position:absolute">
-  <defs>
 
-    <!-- Road / kilometres -->
-    <symbol id="road" viewBox="0 0 24 24">
-      <path d="M7 21l3-18h4l3 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M12 5v3M12 11v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
+<defs>
 
-    <!-- Lightning / energy -->
-    <symbol id="bolt" viewBox="0 0 24 24">
-      <path d="M13.2 2L5.8 13h5.5L10.7 22 18.2 10h-5.4z"
-            fill="currentColor" stroke="currentColor" stroke-width="1"/>
-    </symbol>
+<symbol id="home" viewBox="0 0 24 24">
+  <path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M5.5 10.5V20h13v-9.5M9.5 20v-5h5v5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+</symbol>
 
-    <!-- Gauge / consumption -->
-    <symbol id="gauge" viewBox="0 0 24 24">
-      <path d="M4 16a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M12 12l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M5.5 18h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
+<symbol id="route" viewBox="0 0 24 24">
+  <circle cx="6" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+  <circle cx="18" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+  <path d="M8 7h4c2 0 2 3 0 3h-1c-2 0-2 3 0 3h4" fill="none" stroke="currentColor" stroke-width="1.7"/>
+</symbol>
 
-    <!-- Battery -->
-    <symbol id="battery" viewBox="0 0 24 24">
-      <rect x="3" y="7" width="17" height="10" rx="2"
-            fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M20 10h2v4h-2" fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M6 10h8v4H6z" fill="currentColor"/>
-    </symbol>
+<symbol id="calendar" viewBox="0 0 24 24">
+  <rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M8 3v4M16 3v4M4 9h16" fill="none" stroke="currentColor" stroke-width="1.8"/>
+</symbol>
 
-    <!-- Euro -->
-    <symbol id="euro" viewBox="0 0 24 24">
-      <path d="M18 6.5c-1.2-1.2-2.8-1.8-4.5-1.8-3.6 0-6 3-6 7.3s2.4 7.3 6 7.3c1.7 0 3.3-.6 4.5-1.8"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      <path d="M5 10h8M5 14h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
+<symbol id="stats" viewBox="0 0 24 24">
+  <path d="M5 20V11M10 20V7M15 20V4M20 20V9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</symbol>
 
-    <!-- Route / trips -->
-    <symbol id="route" viewBox="0 0 24 24">
-      <circle cx="6" cy="7" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
-      <circle cx="18" cy="17" r="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
-      <path d="M8 7h4c2 0 2 3 0 3h-1c-2 0-2 3 0 3h4"
-            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-      <path d="M6 9v4M18 15v-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    </symbol>
+<symbol id="gear" viewBox="0 0 24 24">
+  <path d="M9.7 3h4.6l.7 2.4c.5.2 1 .5 1.4.8l2.4-.8 2.3 4-1.8 1.7c.1.5.1 1.1 0 1.7l1.8 1.7-2.3 4-2.4-.8c-.4.3-.9.6-1.4.8l-.7 2.4H9.7L9 18.5c-.5-.2-1-.5-1.4-.8l-2.4.8-2.3-4 1.8-1.7c-.1-.6-.1-1.2 0-1.7L2.9 9.4l2.3-4 2.4.8c.4-.3.9-.6 1.4-.8z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/>
+</symbol>
 
-    <!-- Home -->
-    <symbol id="home" viewBox="0 0 24 24">
-      <path d="M3 11.5L12 4l9 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M5.5 10.5V20h13v-9.5M9.5 20v-5h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-    </symbol>
+<symbol id="road" viewBox="0 0 24 24">
+  <path d="M7 21 10 3h4l3 18" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M12 5v3M12 11v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+</symbol>
 
-    <!-- Briefcase -->
-    <symbol id="briefcase" viewBox="0 0 24 24">
-      <rect x="3" y="7" width="18" height="13" rx="2"
-            fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18"
-            fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M10 12v2h4v-2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    </symbol>
+<symbol id="bolt" viewBox="0 0 24 24">
+  <path d="M13.2 2 5.8 13h5.5L10.7 22 18.2 10h-5.4z" fill="currentColor"/>
+</symbol>
 
-    <!-- Calendar -->
-    <symbol id="calendar" viewBox="0 0 24 24">
-      <rect x="4" y="5" width="16" height="15" rx="2"
-            fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M8 3v4M16 3v4M4 9h16" fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M8 13h2M14 13h2M8 16h2" stroke="currentColor" stroke-width="1.5"/>
-    </symbol>
+<symbol id="gauge" viewBox="0 0 24 24">
+  <path d="M4 16a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="m12 12 4-4M5.5 18h13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+</symbol>
 
-    <!-- Gear -->
-    <symbol id="gear" viewBox="0 0 24 24">
-      <path d="M9.7 3h4.6l.7 2.4c.5.2 1 .5 1.4.8l2.4-.8 2.3 4-1.8 1.7c.1.5.1 1.1 0 1.7l1.8 1.7-2.3 4-2.4-.8c-.4.3-.9.6-1.4.8l-.7 2.4H9.7L9 18.5c-.5-.2-1-.5-1.4-.8l-2.4.8-2.3-4 1.8-1.7c-.1-.6-.1-1.2 0-1.7L2.9 9.4l2.3-4 2.4.8c.4-.3.9-.6 1.4-.8z"
-            fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.7"/>
-    </symbol>
+<symbol id="battery" viewBox="0 0 24 24">
+  <rect x="3" y="7" width="17" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M20 10h2v4h-2M6 10h8v4H6z" fill="currentColor"/>
+</symbol>
 
-    <!-- Statistics -->
-    <symbol id="stats" viewBox="0 0 24 24">
-      <path d="M5 20V11M10 20V7M15 20V4M20 20V9"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </symbol>
+<symbol id="euro" viewBox="0 0 24 24">
+  <path d="M18 6.5c-1.2-1.2-2.8-1.8-4.5-1.8-3.6 0-6 3-6 7.3s2.4 7.3 6 7.3c1.7 0 3.3-.6 4.5-1.8M5 10h8M5 14h8"
+    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</symbol>
 
-    <!-- Leaf -->
-    <symbol id="leaf" viewBox="0 0 24 24">
-      <path d="M20 4C11 4 5 8 5 14c0 3 2 5 5 5 6 0 9-6 10-15z"
-            fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M4 21c3-5 7-8 12-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
+<symbol id="briefcase" viewBox="0 0 24 24">
+  <rect x="3" y="7" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18" fill="none" stroke="currentColor" stroke-width="1.8"/>
+</symbol>
 
-    <!-- Chevron -->
-    <symbol id="chevron" viewBox="0 0 24 24">
-      <path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
+<symbol id="leaf" viewBox="0 0 24 24">
+  <path d="M20 4C11 4 5 8 5 14c0 3 2 5 5 5 6 0 9-6 10-15z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  <path d="M4 21c3-5 7-8 12-10" fill="none" stroke="currentColor" stroke-width="1.8"/>
+</symbol>
 
-  </defs>
+<symbol id="chevron" viewBox="0 0 24 24">
+  <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+
+</defs>
 </svg>
+
 
 <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
+<!-- SIDEBAR -->
 
-    <div class="brand">
-      <!-- Tesla T logo from the supplied reference -->
+<aside class="sidebar">
+
+  <div class="brand">
+
+    <img
+      class="tesla-logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Tesla_T_symbol_-_white.svg"
+      alt="Tesla"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="brand-name">
+      TESLA <span>TRACK</span>
+    </div>
+
+  </div>
+
+
+  <nav class="nav">
+
+    <div class="nav-item active">
+      <div class="nav-svg"><svg><use href="#home"/></svg></div>
+      Resumo
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-svg"><svg><use href="#route"/></svg></div>
+      Viagens
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-svg"><svg><use href="#calendar"/></svg></div>
+      Histórico
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-svg"><svg><use href="#stats"/></svg></div>
+      Estatísticas
+    </div>
+
+    <div class="nav-item">
+      <div class="nav-svg"><svg><use href="#gear"/></svg></div>
+      Definições
+    </div>
+
+  </nav>
+
+
+  <div class="vehicle-wrap">
+
+    <div class="vehicle-card">
+
       <img
-        class="tesla-logo"
-        src="data:image/webp;base64,UklGRiQCAABXRUJQVlA4IBgCAADwCwCdASozAC4APjEUiUMiISEWrmQAIAMEtIBhu71P5XyiB9D9vzhf9O+VXMW/zb8iNRd1In+j9Hz+18x/0F/t/VS/yYh38dyf3lMGMO26rcUpGGK3tWcl4cylQPVCYM5w8g73fqa90AD+/5KsWpgIizixEby+iLDGqiozJkMjKIatUtlVf96bZ/WqE7H0nticf/tRHDnovhic8mKdH8Vcu9lOuL/DTh7elG7VSnbN6m/x/Y7izsCMHetehXkUvmS+jfO/lkmtGmsLioc/6nkDAyjwTvnP+BWzhyt/5u5Lze2tC9zAX/2db2vXcko2/GKyM32e3/vkc3O6RDPkEV/0tt8maPEmDkn/e8gf/8lODFS8pUTUnHQ1seCV/hJq3/6aqI45zZmBYD7ubzjCMNhUiwSPhGH+mXY/j8SlGO1e62/YzDCkgGxnUxzAc34xZSyBoPlNK0FJ8+h42H7li7js5TQtaFKSVlC7BWkdEcifgfwXhCz667SXN/Eyb8LtD0lUEc/GaqcpQthQ4MCbsw4fvASYEFNZZrH03McLy42CIKWzkxNuw/0bfSCUFhF7rtZBWQu1cOEua+Lc5zx9zfbfy3vVR/t4Etev/MlFldpItWuv4Gogc/Vj2BlYermBRfVIzn0VTd4QGGhw8Wa0XPjJ5a/h9HSniTOf33bKja1gPObI86pAJGm4ip2NgVOC15h5ni4bZYqAAA=="
-        alt="Tesla"
+        class="vehicle-photo"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Tesla_Model_Y_white_%281%29.jpg/640px-Tesla_Model_Y_white_%281%29.jpg"
+        alt="Model Y"
+        onerror="this.classList.add('hidden')"
       >
-      <div class="brand-name">TESLA <span>TRACK</span></div>
+
+      <div class="vehicle-fallback">
+        Model Y
+      </div>
+
+      <div class="vehicle-name">
+        Model Y
+      </div>
+
+      <div class="vehicle-model">
+        Long Range Dual Motor
+      </div>
+
+      <div class="vehicle-status">
+        <span class="status-dot"></span>
+        Ligado
+      </div>
+
+      <div class="vehicle-arrow">›</div>
+
     </div>
 
-    <nav class="nav">
 
-      <div class="nav-item active">
-        <svg class="nav-icon"><use href="#home"/></svg>
-        <span>Resumo</span>
+    <div class="sidebar-footer">
+      Tesla Track v1.0<br>
+      O teu Tesla, em números.
+    </div>
+
+  </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<div class="content">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <img
+    class="hero-photo"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Tesla_Model_Y_white_%281%29.jpg/1280px-Tesla_Model_Y_white_%281%29.jpg"
+    alt="Tesla Model Y"
+    onerror="this.classList.add('hidden')"
+  >
+
+  <div class="hero-fallback"></div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-title">
+      Olá!
+    </div>
+
+    <div class="hero-subtitle">
+      Aqui está o resumo da tua<br>
+      Model Y de hoje.
+    </div>
+
+    <div class="date-pill">
+
+      <div class="date-icon">
+        <svg><use href="#calendar"/></svg>
       </div>
 
-      <div class="nav-item">
-        <svg class="nav-icon"><use href="#route"/></svg>
-        <span>Viagens</span>
+      Hoje, 8 de Jun de 2025
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- METRICS -->
+
+<section class="metrics">
+
+
+<div class="metric">
+
+  <div class="metric-icon blue">
+    <svg><use href="#road"/></svg>
+  </div>
+
+  <div class="metric-label">
+    Quilómetros hoje
+  </div>
+
+  <div class="metric-value">
+    82.4 <small>km</small>
+  </div>
+
+  <div class="metric-change">
+    <span class="positive">↑ 12%</span> vs. ontem
+  </div>
+
+</div>
+
+
+<div class="metric">
+
+  <div class="metric-icon green">
+    <svg><use href="#bolt"/></svg>
+  </div>
+
+  <div class="metric-label">
+    Energia usada
+  </div>
+
+  <div class="metric-value">
+    14.7 <small>kWh</small>
+  </div>
+
+  <div class="metric-change">
+    <span class="positive">↑ 8%</span> vs. ontem
+  </div>
+
+</div>
+
+
+<div class="metric">
+
+  <div class="metric-icon purple">
+    <svg><use href="#gauge"/></svg>
+  </div>
+
+  <div class="metric-label">
+    Consumo médio
+  </div>
+
+  <div class="metric-value">
+    17.8 <small>kWh/100 km</small>
+  </div>
+
+  <div class="metric-change">
+    <span class="positive">↓ 4%</span> vs. ontem
+  </div>
+
+</div>
+
+
+<div class="metric">
+
+  <div class="metric-icon cyan">
+    <svg><use href="#battery"/></svg>
+  </div>
+
+  <div class="metric-label">
+    Bateria
+  </div>
+
+  <div class="metric-value">
+    68<small>%</small>
+  </div>
+
+  <div class="metric-change">
+    Autonomia estimada<br>
+    <strong style="color:#e2edf8;font-size:10px">278 km</strong>
+  </div>
+
+</div>
+
+
+<div class="metric">
+
+  <div class="metric-icon orange">
+    <svg><use href="#euro"/></svg>
+  </div>
+
+  <div class="metric-label">
+    Custo de hoje
+  </div>
+
+  <div class="metric-value">
+    €2.87
+  </div>
+
+  <div class="metric-change">
+    <span class="positive">↑ 10%</span> vs. ontem
+  </div>
+
+</div>
+
+
+</section>
+
+
+<!-- LOWER -->
+
+<section class="lower">
+
+
+<!-- TRIPS -->
+
+<div class="card">
+
+  <div class="card-head">
+
+    <div class="card-icon blue">
+      <svg><use href="#route"/></svg>
+    </div>
+
+    <div>
+      <div class="card-title">
+        Viagens de hoje
+      </div>
+      <div class="card-subtitle">
+        3 viagens registadas
+      </div>
+    </div>
+
+    <div class="card-link">
+      Ver todas →
+    </div>
+
+  </div>
+
+
+  <div class="trip-list">
+
+
+    <div class="trip">
+
+      <div class="trip-icon blue">
+        <svg><use href="#home"/></svg>
       </div>
 
-      <div class="nav-item">
-        <svg class="nav-icon"><use href="#calendar"/></svg>
-        <span>Histórico</span>
-      </div>
+      <div class="trip-main">
 
-      <div class="nav-item">
-        <svg class="nav-icon"><use href="#stats"/></svg>
-        <span>Estatísticas</span>
-      </div>
-
-      <div class="nav-item">
-        <svg class="nav-icon"><use href="#gear"/></svg>
-        <span>Definições</span>
-      </div>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-
-      <div class="vehicle-card">
-
-        <!-- Model Y image from supplied reference -->
-        <img
-          class="vehicle-photo"
-          src="data:image/webp;base64,UklGRnoDAABXRUJQVlA4IG4DAAAQEwCdASp/AEAAPjEWiUMiISEVCm1EIAMEs4RIEuwAU/Xwn5dHyff/rycD/lXbI8bulHmlfTN7181//XjRtiMA9aeIXtPT2s8Ylp4+4Nm0jp2/6dS9unBswNetDywK7n+LzPvcuFcnxRXBw0gXpzBNYLalo+7salAcdNEDa3ldvm5RLQFiUdT7YumnyOrr/w34b4BIkSOYyeRXFc4cyNY4AAD+9k8v+j/lZ5V5p+HZIdIg+PTqGJxd5Z0vbBmCjxwOTp9+sDc8v09SPwcb9mzdIjOzW2rWHNsayWZgTHtXuCU97/0/Q//14AUNjq+LXqsL840BXPN2CBl3Epym//eR2QRBhwcYzL3yZuxQgV5MsvFnVukAgbw3HNwk6pNy4aONQcIi7YhdBwowdTRZlgn/uKalJmRDpg/CZ0vubAF1L76JoNUSra7RhvE+CpRUdTDZVgNoU8S87RLM2TJhsN/zmhMy5A95lUYnJMtkeEPGcVMdkpdT4nGWUS2ZAa2UtI4T6XwF9ewV/P05udbu8a1LIaVW/C3pZ01v8qcFvRAD8olDUlBWWyfEy7fgsMkiZJIuZdpDGdyzdplDbfyQ9VZXdEUSXeNzBILFvKjW6ts4mdPrj1p91K5B67c/madFT78sEwqKkwtlz7WwDouT/UiKk93lC9roqdrw0EDTJ0vzc/Val8Ja6z1thLxPXiLOF3KBjIhK6nzvyz381bUeVQLU/UBUaS3L6lk4sDmEu+NwHN91mtyzrfF0OxrW9Kr1cvPt8VwgaKOF3tTrtVSqedM6LiwN7dxhpF6L7AtkapO09frAB3YTXe3iGQ+OgE91a8hoJBgCVoseqSIK2AyR7C+pzPNKyjXFQ8NjOD7v88lEb17Jo267a1APkYPE2KzqA/PN2ET9cTkEix04xo79AkSfV7Y24b29svmsFaTiPCD22ftNMJkdnTfqskzYEZmU78C69JOtvE8VmV0O6lSKXeu87zH1RfABQIVbbt6mIRRLje5jTe3xrTC46oEYVhV8DGeMv7F6m/C/pZ5ZPTiqE2KMAr9GYHy/kJfuH85lNmy+KM2QELWh8UIjveFlJ16+XCfExlmr6V3IWdHHHii/0ZNGm9744uPwp5T8tdXV5u1VkX23YTKsF6Jg3DmpryqYNWCe8+0wnDRAFIEbzAAA=="
-          alt="Model Y"
-        >
-
-        <div class="vehicle-name">Model Y</div>
-        <div class="vehicle-model">Long Range Dual Motor</div>
-
-        <div class="vehicle-status">
-          <span class="status-dot"></span>
-          Ligado
+        <div class="trip-name">
+          Casa → Trabalho
         </div>
 
-        <div class="vehicle-chevron">›</div>
+        <div class="trip-time">
+          08:12 - 08:45
+        </div>
 
       </div>
 
-      <div class="sidebar-footer">
-        Tesla Track v1.0<br>
-        O teu Tesla, em números.
+      <div class="trip-data">
+        <span>31,2 km</span>
+        <span>5,5 kWh</span>
+      </div>
+
+      <div class="chevron">
+        <svg><use href="#chevron"/></svg>
       </div>
 
     </div>
-  </aside>
 
 
-  <!-- MAIN -->
-  <main class="main">
-    <div class="content">
+    <div class="trip">
 
-      <!-- HERO -->
-      <section class="hero">
+      <div class="trip-icon purple">
+        <svg><use href="#briefcase"/></svg>
+      </div>
 
-        <img
-          class="hero-photo"
-          src="data:image/webp;base64,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"
-          alt="Model Y"
-        >
+      <div class="trip-main">
 
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-          <div class="hero-title">Olá!</div>
-          <div class="hero-subtitle">
-            Aqui está o resumo da tua<br>
-            Model Y de hoje.
-          </div>
-
-          <div class="date-pill">
-            <svg><use href="#calendar"/></svg>
-            Hoje, 8 de Jun de 2025
-          </div>
+        <div class="trip-name">
+          Trabalho → Casa
         </div>
 
-      </section>
-
-
-      <!-- METRICS -->
-      <section class="metrics">
-
-        <div class="metric">
-          <div class="metric-icon blue">
-            <svg><use href="#road"/></svg>
-          </div>
-          <div class="metric-label">Quilómetros hoje</div>
-          <div class="metric-value">82.4 <small>km</small></div>
-          <div class="metric-change"><strong>↑ 12%</strong> vs. ontem</div>
+        <div class="trip-time">
+          17:46 - 18:20
         </div>
 
-        <div class="metric">
-          <div class="metric-icon green">
-            <svg><use href="#bolt"/></svg>
-          </div>
-          <div class="metric-label">Energia usada</div>
-          <div class="metric-value">14.7 <small>kWh</small></div>
-          <div class="metric-change"><strong>↑ 8%</strong> vs. ontem</div>
-        </div>
-
-        <div class="metric">
-          <div class="metric-icon purple">
-            <svg><use href="#gauge"/></svg>
-          </div>
-          <div class="metric-label">Consumo médio</div>
-          <div class="metric-value">17.8 <small>kWh/100 km</small></div>
-          <div class="metric-change"><strong>↓ 4%</strong> vs. ontem</div>
-        </div>
-
-        <div class="metric">
-          <div class="metric-icon cyan">
-            <svg><use href="#battery"/></svg>
-          </div>
-          <div class="metric-label">Bateria</div>
-          <div class="metric-value">68<small>%</small></div>
-          <div class="metric-change">Autonomia estimada<br><b style="color:#dce7f5;font-size:11px">278 km</b></div>
-        </div>
-
-        <div class="metric">
-          <div class="metric-icon orange">
-            <svg><use href="#euro"/></svg>
-          </div>
-          <div class="metric-label">Custo de hoje</div>
-          <div class="metric-value">€2.87</div>
-          <div class="metric-change"><strong>↑ 10%</strong> vs. ontem</div>
-        </div>
-
-      </section>
-
-
-      <!-- LOWER GRID -->
-      <section class="dashboard-grid">
-
-        <!-- TRIPS -->
-        <div class="card">
-
-          <div class="card-header">
-
-            <div class="card-title-icon">
-              <svg><use href="#route"/></svg>
-            </div>
-
-            <div>
-              <div class="card-title">Viagens de hoje</div>
-              <div class="card-subtitle">3 viagens registadas</div>
-            </div>
-
-            <div class="view-all">
-              Ver todas <span>→</span>
-            </div>
-
-          </div>
-
-          <div class="trips">
-
-            <div class="trip">
-              <div class="trip-icon blue">
-                <svg><use href="#home"/></svg>
-              </div>
-
-              <div class="trip-route">
-                <div class="trip-name">Casa → Trabalho</div>
-                <div class="trip-time">08:12 - 08:45</div>
-              </div>
-
-              <div class="trip-data">
-                <span>31,2 km</span>
-                <span>5,5 kWh</span>
-              </div>
-
-              <div class="trip-arrow">›</div>
-            </div>
-
-
-            <div class="trip">
-              <div class="trip-icon purple">
-                <svg><use href="#briefcase"/></svg>
-              </div>
-
-              <div class="trip-route">
-                <div class="trip-name">Trabalho → Casa</div>
-                <div class="trip-time">17:46 - 18:20</div>
-              </div>
-
-              <div class="trip-data">
-                <span>31,8 km</span>
-                <span>5,6 kWh</span>
-              </div>
-
-              <div class="trip-arrow">›</div>
-            </div>
-
-
-            <div class="trip">
-              <div class="trip-icon green">
-                <svg><use href="#home"/></svg>
-              </div>
-
-              <div class="trip-route">
-                <div class="trip-name">Casa → Padel</div>
-                <div class="trip-time">21:05 - 21:32</div>
-              </div>
-
-              <div class="trip-data">
-                <span>19,4 km</span>
-                <span>3,6 kWh</span>
-              </div>
-
-              <div class="trip-arrow">›</div>
-            </div>
-
-          </div>
-        </div>
-
-
-        <!-- CONSUMPTION -->
-        <div class="card chart-card">
-
-          <div class="card-header">
-
-            <div class="card-title-icon">
-              <svg><use href="#bolt"/></svg>
-            </div>
-
-            <div>
-              <div class="card-title">Consumo</div>
-              <div class="card-subtitle">Últimos 7 dias</div>
-            </div>
-
-          </div>
-
-          <div class="chart-area">
-
-            <div class="chart">
-
-              <svg viewBox="0 0 330 155" preserveAspectRatio="none">
-
-                <!-- horizontal grid -->
-                <path d="M26 15H316 M26 55H316 M26 95H316 M26 135H316"
-                      stroke="#173a5b" stroke-width="1"/>
-
-                <!-- vertical grid -->
-                <path d="M26 15V135 M71 15V135 M116 15V135 M161 15V135 M206 15V135 M251 15V135 M316 15V135"
-                      stroke="#143451" stroke-width="1"/>
-
-                <!-- area -->
-                <path d="
-                  M26 74
-                  C45 67,55 62,71 65
-                  C88 68,99 85,116 89
-                  C131 92,145 73,161 70
-                  C177 67,190 82,206 80
-                  C223 78,235 54,251 56
-                  C273 58,292 73,316 68
-                  L316 135
-                  L26 135 Z"
-                  fill="rgba(23,111,220,.20)"
-                />
-
-                <!-- line -->
-                <path d="
-                  M26 74
-                  C45 67,55 62,71 65
-                  C88 68,99 85,116 89
-                  C131 92,145 73,161 70
-                  C177 67,190 82,206 80
-                  C223 78,235 54,251 56
-                  C273 58,292 73,316 68"
-                  fill="none"
-                  stroke="#247fe8"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                />
-
-                <circle cx="26" cy="74" r="3.2" fill="#247fe8"/>
-                <circle cx="71" cy="65" r="3.2" fill="#247fe8"/>
-                <circle cx="116" cy="89" r="3.2" fill="#247fe8"/>
-                <circle cx="161" cy="70" r="3.2" fill="#247fe8"/>
-                <circle cx="206" cy="80" r="3.2" fill="#247fe8"/>
-                <circle cx="251" cy="56" r="3.2" fill="#247fe8"/>
-                <circle cx="316" cy="68" r="3.2" fill="#247fe8"/>
-
-                <text x="3" y="18" fill="#91a7c0" font-size="9">30</text>
-                <text x="3" y="58" fill="#91a7c0" font-size="9">20</text>
-                <text x="3" y="98" fill="#91a7c0" font-size="9">10</text>
-                <text x="8" y="138" fill="#91a7c0" font-size="9">0</text>
-
-              </svg>
-
-            </div>
-
-            <div class="chart-labels">
-              <span>2 Jun</span>
-              <span>3 Jun</span>
-              <span>4 Jun</span>
-              <span>5 Jun</span>
-              <span>6 Jun</span>
-              <span>7 Jun</span>
-              <span>8 Jun</span>
-            </div>
-
-            <div class="average">
-
-              <div class="average-icon">
-                <svg><use href="#bolt"/></svg>
-              </div>
-
-              <div class="average-text">
-                <div class="average-label">Média dos últimos 7 dias</div>
-                <div class="average-value">17,9 kWh/100 km</div>
-              </div>
-
-              <div class="average-change">⌁ ↓ 6%</div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- COST SUMMARY -->
-        <div class="card cost-card">
-
-          <div class="card-header">
-
-            <div class="card-title-icon orange">
-              <svg><use href="#euro"/></svg>
-            </div>
-
-            <div>
-              <div class="card-title">Resumo de custos</div>
-              <div class="card-subtitle">Com base no preço da eletricidade definido</div>
-            </div>
-
-          </div>
-
-          <div class="cost-body">
-
-            <div class="cost-top">
-
-              <div>
-                <div class="cost-total">€ 43,20</div>
-                <div class="cost-period">nos últimos 7 dias</div>
-              </div>
-
-              <div>
-                <div class="price-pill">€ 0,195 /kWh</div>
-                <div class="price-label">Preço da eletricidade</div>
-              </div>
-
-            </div>
-
-            <div class="progress">
-              <span></span>
-            </div>
-
-            <div class="cost-stats">
-
-              <div class="cost-stat">
-                <div class="cost-stat-icon" style="color:#17c978">
-                  <svg><use href="#bolt"/></svg>
-                </div>
-                <div>
-                  <div class="stat-label">Energia total</div>
-                  <div class="stat-value">221,4 kWh</div>
-                </div>
-              </div>
-
-              <div class="cost-stat">
-                <div class="cost-stat-icon" style="color:#ef8725">
-                  <svg><use href="#euro"/></svg>
-                </div>
-                <div>
-                  <div class="stat-label">Custo total</div>
-                  <div class="stat-value">€ 43,20</div>
-                </div>
-              </div>
-
-              <div class="cost-stat">
-                <div class="cost-stat-icon" style="color:#20c77a">
-                  <svg><use href="#leaf"/></svg>
-                </div>
-                <div>
-                  <div class="stat-label">Custo por km</div>
-                  <div class="stat-value">€ 0,53</div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- SETTINGS -->
-        <div class="card settings-card">
-
-          <div class="card-header">
-
-            <div class="card-title-icon gray">
-              <svg><use href="#gear"/></svg>
-            </div>
-
-            <div>
-              <div class="card-title">Definições</div>
-            </div>
-
-          </div>
-
-          <div class="settings-body">
-
-            <div class="setting-label">
-              Preço da eletricidade (€/kWh)
-            </div>
-
-            <div class="setting-row">
-
-              <input
-                id="electricityPrice"
-                class="setting-input"
-                type="number"
-                step="0.001"
-                value="0.195"
-              >
-
-              <button class="save-btn" onclick="savePrice()">
-                Guardar
-              </button>
-
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="version-row">
-
-              <img
-                class="version-logo"
-                src="data:image/webp;base64,UklGRiQCAABXRUJQVlA4IBgCAADwCwCdASozAC4APjEUiUMiISEWrmQAIAMEtIBhu71P5XyiB9D9vzhf9O+VXMW/zb8iNRd1In+j9Hz+18x/0F/t/VS/yYh38dyf3lMGMO26rcUpGGK3tWcl4cylQPVCYM5w8g73fqa90AD+/5KsWpgIizixEby+iLDGqiozJkMjKIatUtlVf96bZ/WqE7H0nticf/tRHDnovhic8mKdH8Vcu9lOuL/DTh7elG7VSnbN6m/x/Y7izsCMHetehXkUvmS+jfO/lkmtGmsLioc/6nkDAyjwTvnP+BWzhyt/5u5Lze2tC9zAX/2db2vXcko2/GKyM32e3/vkc3O6RDPkEV/0tt8maPEmDkn/e8gf/8lODFS8pUTUnHQ1seCV/hJq3/6aqI45zZmBYD7ubzjCMNhUiwSPhGH+mXY/j8SlGO1e62/YzDCkgGxnUxzAc34xZSyBoPlNK0FJ8+h42H7li7js5TQtaFKSVlC7BWkdEcifgfwXhCz667SXN/Eyb8LtD0lUEc/GaqcpQthQ4MCbsw4fvASYEFNZZrH03McLy42CIKWzkxNuw/0bfSCUFhF7rtZBWQu1cOEua+Lc5zx9zfbfy3vVR/t4Etev/MlFldpItWuv4Gogc/Vj2BlYermBRfVIzn0VTd4QGGhw8Wa0XPjJ5a/h9HSniTOf33bKja1gPObI86pAJGm4ip2NgVOC15h5ni4bZYqAAA=="
-                alt="Tesla"
-              >
-
-              <div>
-                <div class="version-name">Tesla Track</div>
-                <div class="version-sub">V1.0 - Dados de demonstração</div>
-              </div>
-
-              <div class="version-arrow">›</div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+      </div>
+
+      <div class="trip-data">
+        <span>31,8 km</span>
+        <span>5,6 kWh</span>
+      </div>
+
+      <div class="chevron">
+        <svg><use href="#chevron"/></svg>
+      </div>
 
     </div>
-  </main>
+
+
+    <div class="trip">
+
+      <div class="trip-icon green">
+        <svg><use href="#home"/></svg>
+      </div>
+
+      <div class="trip-main">
+
+        <div class="trip-name">
+          Casa → Padel
+        </div>
+
+        <div class="trip-time">
+          21:05 - 21:32
+        </div>
+
+      </div>
+
+      <div class="trip-data">
+        <span>19,4 km</span>
+        <span>3,6 kWh</span>
+      </div>
+
+      <div class="chevron">
+        <svg><use href="#chevron"/></svg>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CONSUMPTION -->
+
+<div class="card chart-card">
+
+  <div class="card-head">
+
+    <div class="card-icon blue">
+      <svg><use href="#bolt"/></svg>
+    </div>
+
+    <div>
+      <div class="card-title">
+        Consumo
+      </div>
+      <div class="card-subtitle">
+        Últimos 7 dias
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="chart-box">
+
+    <svg class="chart" viewBox="0 0 330 142" preserveAspectRatio="none">
+
+      <path
+        d="M25 15H320M25 55H320M25 95H320M25 135H320"
+        stroke="#173b5c"
+        stroke-width="1"
+      />
+
+      <path
+        d="M25 73
+           C47 65 55 61 72 65
+           C89 69 101 85 117 89
+           C133 92 146 73 162 70
+           C179 67 190 82 207 80
+           C224 78 237 55 252 57
+           C274 59 294 73 320 68
+           L320 135
+           L25 135Z"
+        fill="rgba(21,110,220,.18)"
+      />
+
+      <path
+        d="M25 73
+           C47 65 55 61 72 65
+           C89 69 101 85 117 89
+           C133 92 146 73 162 70
+           C179 67 190 82 207 80
+           C224 78 237 55 252 57
+           C274 59 294 73 320 68"
+        fill="none"
+        stroke="#2380eb"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+
+      <g fill="#2380eb">
+        <circle cx="25" cy="73" r="3"/>
+        <circle cx="72" cy="65" r="3"/>
+        <circle cx="117" cy="89" r="3"/>
+        <circle cx="162" cy="70" r="3"/>
+        <circle cx="207" cy="80" r="3"/>
+        <circle cx="252" cy="57" r="3"/>
+        <circle cx="320" cy="68" r="3"/>
+      </g>
+
+      <g fill="#8199b2" font-size="9">
+        <text x="3" y="18">30</text>
+        <text x="3" y="58">20</text>
+        <text x="3" y="98">10</text>
+        <text x="8" y="138">0</text>
+      </g>
+
+    </svg>
+
+
+    <div class="chart-labels">
+      <span>2 Jun</span>
+      <span>3 Jun</span>
+      <span>4 Jun</span>
+      <span>5 Jun</span>
+      <span>6 Jun</span>
+      <span>7 Jun</span>
+      <span>8 Jun</span>
+    </div>
+
+
+    <div class="average">
+
+      <div class="average-icon">
+        <svg><use href="#bolt"/></svg>
+      </div>
+
+      <div class="average-text">
+
+        <div class="average-label">
+          Média dos últimos 7 dias
+        </div>
+
+        <div class="average-value">
+          17,9 kWh/100 km
+        </div>
+
+      </div>
+
+      <div class="average-change">
+        ↓ 6%
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- COST -->
+
+<div class="card cost-card">
+
+  <div class="card-head">
+
+    <div class="card-icon orange">
+      <svg><use href="#euro"/></svg>
+    </div>
+
+    <div>
+      <div class="card-title">
+        Resumo de custos
+      </div>
+
+      <div class="card-subtitle">
+        Com base no preço da eletricidade definido
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="cost-body">
+
+    <div class="cost-top">
+
+      <div>
+        <div class="cost-value">
+          €43,20
+        </div>
+
+        <div class="cost-period">
+          nos últimos 7 dias
+        </div>
+      </div>
+
+      <div>
+        <div class="price-pill">
+          €0,195 / kWh
+        </div>
+
+        <div class="price-text">
+          Preço da eletricidade
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="progress">
+      <span></span>
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-icon" style="color:#19c878">
+          <svg><use href="#bolt"/></svg>
+        </div>
+
+        <div>
+          <div class="stat-label">
+            Energia total
+          </div>
+
+          <div class="stat-value">
+            221,4 kWh
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon" style="color:#ef8725">
+          <svg><use href="#euro"/></svg>
+        </div>
+
+        <div>
+          <div class="stat-label">
+            Custo total
+          </div>
+
+          <div class="stat-value">
+            €43,20
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon" style="color:#20c878">
+          <svg><use href="#leaf"/></svg>
+        </div>
+
+        <div>
+          <div class="stat-label">
+            Custo por km
+          </div>
+
+          <div class="stat-value">
+            €0,53
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SETTINGS -->
+
+<div class="card settings-card">
+
+  <div class="card-head">
+
+    <div class="card-icon gray">
+      <svg><use href="#gear"/></svg>
+    </div>
+
+    <div class="card-title">
+      Definições
+    </div>
+
+  </div>
+
+
+  <div class="settings-body">
+
+    <div class="input-label">
+      Preço da eletricidade (€/kWh)
+    </div>
+
+    <div class="input-row">
+
+      <input
+        id="electricityPrice"
+        class="input"
+        type="number"
+        step="0.001"
+        value="0.195"
+      >
+
+      <button class="save" onclick="savePrice()">
+        Guardar
+      </button>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <div class="version">
+
+      <img
+        class="version-logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Tesla_T_symbol_-_white.svg"
+        alt="Tesla"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+
+        <div class="version-name">
+          Tesla Track
+        </div>
+
+        <div class="version-sub">
+          V1.0 - Dados de demonstração
+        </div>
+
+      </div>
+
+      <div class="version-arrow">
+        ›
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</section>
+
+</div>
+
+</main>
 
 </div>
 
 
 <script>
+
 function savePrice(){
 
-  const input = document.getElementById("electricityPrice");
-  const value = parseFloat(input.value);
+  const input=document.getElementById("electricityPrice");
+  const value=parseFloat(input.value);
 
-  if(!isNaN(value) && value >= 0){
-    localStorage.setItem("teslaTrackElectricityPrice", value.toString());
+  if(!Number.isNaN(value) && value>=0){
 
-    const button = document.querySelector(".save-btn");
-    const original = button.textContent;
+    localStorage.setItem(
+      "teslaTrackElectricityPrice",
+      value
+    );
 
-    button.textContent = "Guardado ✓";
+    const btn=document.querySelector(".save");
+    const old=btn.textContent;
+
+    btn.textContent="Guardado ✓";
 
     setTimeout(()=>{
-      button.textContent = original;
-    },1500);
+      btn.textContent=old;
+    },1400);
+
   }
+
 }
+
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-  const saved = localStorage.getItem("teslaTrackElectricityPrice");
+  const saved=
+    localStorage.getItem(
+      "teslaTrackElectricityPrice"
+    );
 
   if(saved){
-    document.getElementById("electricityPrice").value = saved;
+    document.getElementById(
+      "electricityPrice"
+    ).value=saved;
   }
 
 });
+
 </script>
 
 </body>
