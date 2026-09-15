@@ -146,6 +146,104 @@
 .toast.success{border-color:#0be28e;color:#0be28e}
 .toast.error{border-color:#ff6b6b;color:#ff6b6b}
 .toast.info{border-color:#168cff;color:#7fb3d9}
+
+/* ===== MOBILE OVERRIDES ===== */
+@media (max-width: 768px) {
+
+  /* Layout base */
+  html, body { width:100%; overflow-x:hidden; }
+  .app { display:block !important; }
+
+  /* Sidebar horizontal no topo */
+  .side {
+    width:100% !important;
+    flex:none !important;
+    height:auto !important;
+    min-height:0 !important;
+    padding:10px 12px !important;
+    border-right:0 !important;
+    border-bottom:1px solid #123a59 !important;
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+  .brand { height:auto !important; display:flex !important; align-items:center !important; gap:8px !important; flex:0 0 auto !important; }
+  .brand svg { width:28px !important; height:28px !important; }
+  .brand-name { font-size:15px !important; }
+
+  /* Nav horizontal scrollável */
+  .nav {
+    display:flex !important;
+    flex-direction:row !important;
+    overflow-x:auto !important;
+    margin:0 !important;
+    flex:1 !important;
+    gap:4px !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+  .nav::-webkit-scrollbar { display:none !important; }
+  .nav a {
+    flex:0 0 auto !important;
+    padding:8px 12px !important;
+    font-size:13px !important;
+    border-radius:20px !important;
+    white-space:nowrap !important;
+    margin:0 !important;
+  }
+  .nav .ic { display:none !important; }
+
+  /* Esconder vehicle e sidefoot na sidebar */
+  .vehicle, .sidefoot { display:none !important; }
+
+  /* Main */
+  .main { padding:12px !important; }
+
+  /* Hero menor */
+  .hero { height:160px !important; }
+  .hero-content h1 { font-size:26px !important; }
+  .hero-content p { font-size:14px !important; }
+
+  /* Métricas — 2 colunas */
+  .metrics {
+    grid-template-columns: 1fr 1fr !important;
+    gap:10px !important;
+  }
+  /* Custo (5º item) ocupa linha inteira */
+  .metric:nth-child(5) {
+    grid-column: 1 / -1 !important;
+  }
+  .metric { min-height:110px !important; padding:14px !important; overflow:hidden !important; }
+  .metric strong { font-size:22px !important; }
+  .metric small { font-size:11px !important; margin-top:4px !important; }
+  .ico { width:36px !important; height:36px !important; font-size:18px !important; margin-bottom:8px !important; }
+
+  /* Autonomia dentro da box bateria */
+  #m-range { font-size:13px !important; }
+
+  /* Layout e bottomgrid — coluna única */
+  .layout, .bottomgrid {
+    grid-template-columns: 1fr !important;
+    gap:10px !important;
+  }
+
+  /* Cards */
+  .card { padding:14px !important; }
+  .head h2 { font-size:15px !important; }
+
+  /* Resumo semanal — 2x2 com altura auto */
+  .card.semanal .semgrid {
+    grid-template-rows: auto auto !important;
+    min-height:180px !important;
+  }
+
+  /* Definições — coluna única */
+  #page-definicoes > div { grid-template-columns:1fr !important; }
+
+  /* Toast */
+  .toast { left:12px !important; right:12px !important; bottom:16px !important; }
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
