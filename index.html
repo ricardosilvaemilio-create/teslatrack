@@ -175,22 +175,31 @@
   /* Modal em mobile — centrado e dentro do ecrã */
   .modal-overlay{
     position:fixed !important;
-    inset:0 !important;
+    top:0 !important;left:0 !important;right:0 !important;bottom:0 !important;
+    width:100vw !important;height:100vh !important;
     display:none;
     align-items:center !important;
     justify-content:center !important;
-    z-index:9999 !important;
-    padding:16px !important
+    z-index:99999 !important;
+    padding:16px !important;
+    background:rgba(0,0,0,0.95) !important;
+    backdrop-filter:blur(6px) !important;
+    -webkit-backdrop-filter:blur(6px) !important;
+    box-sizing:border-box !important
   }
   .modal-overlay.open{display:flex !important}
   .modal{
     width:100% !important;
-    max-width:100% !important;
-    max-height:85vh !important;
+    max-width:420px !important;
+    max-height:90vh !important;
     overflow-y:auto !important;
-    padding:20px !important;
-    border-radius:16px !important;
-    position:relative !important
+    padding:24px !important;
+    border-radius:18px !important;
+    position:relative !important;
+    background:#031525 !important;
+    border:2px solid #1a6dbd !important;
+    box-shadow:0 30px 80px rgba(0,0,0,1) !important;
+    color:#edf7ff !important
   }
   .modal h2{font-size:18px !important}
   .modal p{font-size:13px !important}
@@ -203,25 +212,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js"></script>
 
-<!-- Modal OAuth -->
-<div class="modal-overlay" id="auth-modal">
-  <div class="modal">
-    <h2>Ligar à Tesla API</h2>
-    <p>Credenciais da tua app no Tesla Developer Portal. Ficam guardadas apenas no teu browser.</p>
-    <label>Client ID</label>
-    <input id="input-client-id" type="text" placeholder="ta-xxxxxxxxxxxxx">
-    <label>Client Secret</label>
-    <input id="input-client-secret" type="password" placeholder="tsk-xxxxxxxxxxxxx">
-    <label>Redirect URI</label>
-    <input id="input-redirect-uri" type="text" placeholder="https://teudominio.com/callback">
-    <label style="margin-top:8px">Apps Script URL (Google Sheets)</label>
-    <input id="input-apps-script-url" type="text" placeholder="https://script.google.com/macros/s/...">
-    <div class="modal-btns">
-      <button class="btn-secondary" onclick="closeAuthModal()">Cancelar</button>
-      <button class="btn-primary" onclick="startOAuth()">Autorizar com Tesla →</button>
-    </div>
-  </div>
-</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -789,4 +779,23 @@ function showToast(msg, type='info') {
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(()=>{ t.className='toast'; }, 3500);
 }
-</script></body></html>
+</script><!-- Modal OAuth -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <h2>Ligar à Tesla API</h2>
+    <p>Credenciais da tua app no Tesla Developer Portal. Ficam guardadas apenas no teu browser.</p>
+    <label>Client ID</label>
+    <input id="input-client-id" type="text" placeholder="ta-xxxxxxxxxxxxx">
+    <label>Client Secret</label>
+    <input id="input-client-secret" type="password" placeholder="tsk-xxxxxxxxxxxxx">
+    <label>Redirect URI</label>
+    <input id="input-redirect-uri" type="text" placeholder="https://teudominio.com/callback">
+    <label style="margin-top:8px">Apps Script URL (Google Sheets)</label>
+    <input id="input-apps-script-url" type="text" placeholder="https://script.google.com/macros/s/...">
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeAuthModal()">Cancelar</button>
+      <button class="btn-primary" onclick="startOAuth()">Autorizar com Tesla →</button>
+    </div>
+  </div>
+</div>
+</body></html>
